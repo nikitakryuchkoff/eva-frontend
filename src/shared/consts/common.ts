@@ -1,6 +1,7 @@
 import { Frown, Heart, Mail, MessageSquare } from 'lucide-react';
-import { REACTIONS } from '../types';
+
 import { getComplexUrl } from '../lib';
+import { REACTIONS } from '../types';
 
 export const STORAGE_KEYS = {
   IAM_TOKEN: 'IAM_TOKEN_STORAGE_KEY',

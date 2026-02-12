@@ -1,4 +1,5 @@
 import axios, { AxiosRequestHeaders } from 'axios';
+
 import { STORAGE_KEYS } from '../consts';
 
 const evaApiUrl = typeof window !== 'undefined' ? window.EVA_API_URL : '';

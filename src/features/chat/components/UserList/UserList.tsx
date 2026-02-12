@@ -1,8 +1,11 @@
 import { useCallback, useRef, type FC } from 'react';
+
 import classNames from 'classnames';
 import { Virtuoso, type VirtuosoHandle } from 'react-virtuoso';
-import styles from './UserList.module.css';
+
 import { type MentionEmployee } from '@/enitites/user';
+
+import styles from './UserList.module.css';
 
 interface MentionDropdownProps {
   employees: MentionEmployee[];

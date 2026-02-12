@@ -1,5 +1,6 @@
-import { Message } from '@/enitites/message';
 import { create } from 'zustand';
+
+import { Message } from '@/enitites/message';
 
 interface ChatState {
   messages: Message[];

@@ -1,9 +1,11 @@
 import { type FC, useCallback } from 'react';
+
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { MoreVertical, type LucideIcon } from 'lucide-react';
 import classNames from 'classnames';
-import styles from './Dropdown.module.css';
+import { MoreVertical, type LucideIcon } from 'lucide-react';
+
 import { Button } from '..';
+import styles from './Dropdown.module.css';
 
 interface Props {
   items: {

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import { QueryProvider } from '@/app/providers';
 import { Chat } from '@/features/chat/components/Chat';
 import { useClientStore } from '@/shared';

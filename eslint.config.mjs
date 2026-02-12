@@ -1,6 +1,7 @@
 import js from '@eslint/js';
 import tseslintPlugin from '@typescript-eslint/eslint-plugin';
 import tseslintParser from '@typescript-eslint/parser';
+import importPlugin from 'eslint-plugin-import';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import reactRefreshPlugin from 'eslint-plugin-react-refresh';
 
@@ -49,6 +50,7 @@ const config = [
       },
     },
     plugins: {
+      import: importPlugin,
       '@typescript-eslint': tseslintPlugin,
       'react-hooks': reactHooksPlugin,
       'react-refresh': reactRefreshPlugin,
@@ -70,6 +72,45 @@ const config = [
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-empty-object-type': 'off',
       'no-case-declarations': 'off',
+      'import/order': [
+        'error',
+        {
+          groups: ['builtin', 'external', 'internal', ['parent', 'sibling', 'index']],
+          pathGroups: [
+            {
+              pattern: 'react',
+              group: 'external',
+              position: 'before',
+            },
+            {
+              pattern: 'next/**',
+              group: 'external',
+              position: 'before',
+            },
+            {
+              pattern: '@/**',
+              group: 'internal',
+              position: 'before',
+            },
+            {
+              pattern: 'routes/**',
+              group: 'internal',
+              position: 'before',
+            },
+            {
+              pattern: 'types/**',
+              group: 'internal',
+              position: 'before',
+            },
+          ],
+          pathGroupsExcludedImportTypes: ['builtin'],
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
+          'newlines-between': 'always',
+        },
+      ],
     },
   },
 ];

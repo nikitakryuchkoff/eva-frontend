@@ -1,7 +1,9 @@
 import { forwardRef } from 'react';
+
+import { Loader } from 'lucide-react';
+
 import styles from './Button.module.css';
 import { ButtonProps } from './Button.typed';
-import { Loader } from 'lucide-react';
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (

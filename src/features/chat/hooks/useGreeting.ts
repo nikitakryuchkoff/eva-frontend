@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
+
 import { useQuery } from '@tanstack/react-query';
-import { useChatStore } from '@/shared/store';
-import { QUERY_KEYS } from '@/shared/consts';
-import { fetchGreting, Message } from '@/enitites/message';
-import { MESSAGE_IDS, MessageAuthor } from '@/shared/types';
+
 import { Integration } from '@/enitites/integration';
+import { fetchGreting, Message } from '@/enitites/message';
+import { QUERY_KEYS } from '@/shared/consts';
+import { useChatStore } from '@/shared/store';
+import { MESSAGE_IDS, MessageAuthor } from '@/shared/types';
 
 interface UseGreetingOptions {
   integrationId: string | null;

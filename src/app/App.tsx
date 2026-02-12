@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client';
+
 import { QueryProvider } from '@/app/providers';
 import { Chat } from '@/features/chat/components/Chat';
 import './global.css';

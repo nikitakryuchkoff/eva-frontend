@@ -1,6 +1,7 @@
-import { axiosInstance } from '@/shared/api';
-import { MessageRequest, Messages, MessageResponse, MessageButtonRequest } from './types';
 import { REACTIONS } from '@/shared';
+import { axiosInstance } from '@/shared/api';
+
+import { MessageRequest, Messages, MessageResponse, MessageButtonRequest } from './types';
 
 export const fetchMessages = async (integrationId: string, id: number = 10000000) => {
   const { data } = await axiosInstance.get<Messages>(

@@ -1,10 +1,13 @@
 import { useCallback, useState } from 'react';
+
 import { useMutation } from '@tanstack/react-query';
 import { nanoid } from 'nanoid';
-import { useChatStore } from '@/shared/store';
-import { Message, parseAnswerText, sendLikeDislike } from '../..';
+
 import { MessageAuthor, messageConverter, REACTIONS } from '@/shared';
 import { FEEDBACK_TEXT } from '@/shared/consts';
+import { useChatStore } from '@/shared/store';
+
+import { Message, parseAnswerText, sendLikeDislike } from '../..';
 
 interface UseFeedbackParams {
   messageId: string | number;

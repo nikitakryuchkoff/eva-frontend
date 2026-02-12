@@ -1,0 +1,96 @@
+.scene {
+  flex: 1;
+  overflow: hidden;
+  background: var(--eva-color-neutral-0);
+  padding: 14px 16px 12px;
+}
+
+.list {
+  width: min(100%, 760px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item {
+  display: flex;
+}
+
+.itemLeft {
+  justify-content: flex-start;
+}
+
+.itemRight {
+  justify-content: flex-end;
+}
+
+.bubble {
+  position: relative;
+  overflow: hidden;
+  border-radius: 11px;
+  min-height: 44px;
+  padding: 11px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+}
+
+.bubbleBot {
+  width: min(70%, 560px);
+  background: var(--eva-color-bot-bubble);
+}
+
+.bubbleUser {
+  width: min(70%, 560px);
+  background: var(--eva-color-user-bubble);
+}
+
+.line {
+  height: 9px;
+  border-radius: var(--eva-radius-full);
+  background: rgba(143, 150, 163, 0.38);
+}
+
+.lineWide {
+  width: 88%;
+}
+
+.lineMedium {
+  width: 70%;
+}
+
+.lineShort {
+  width: 42%;
+}
+
+.pulse {
+  position: relative;
+}
+
+.pulse::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 15%, rgba(255, 255, 255, 0.72) 45%, transparent 75%);
+  transform: translateX(-140%);
+  animation: chat-skeleton-shimmer 1.45s ease-in-out infinite;
+}
+
+@media (max-width: 480px) {
+  .scene {
+    padding: 12px 10px 10px;
+  }
+
+  .bubbleBot,
+  .bubbleUser {
+    width: min(80%, 460px);
+  }
+}
+
+@keyframes chat-skeleton-shimmer {
+  100% {
+    transform: translateX(140%);
+  }
+}

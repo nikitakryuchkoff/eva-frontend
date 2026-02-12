@@ -1,8 +1,10 @@
-import { QUERY_KEYS } from '@/shared';
 import { useQuery } from '@tanstack/react-query';
+
+import { QUERY_KEYS } from '@/shared';
+
+import { Integration } from '.';
 import { fetchIntegrations } from './api';
 import { INTEGRATIONS_STORAGE_KEY } from './consts';
-import { Integration } from '.';
 
 interface Props {
   onIntegrationSelect: (integration: Integration) => void;

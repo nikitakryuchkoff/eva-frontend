@@ -1,10 +1,12 @@
-import { isUserMessage, isAssistantMessage, Message as MessageType } from '@/enitites/message';
 import { type FC, memo } from 'react';
-import { EvaMessage } from './components/EvaMessage';
-import { UserMessage } from './components/UserMessage';
+
+import { isUserMessage, isAssistantMessage, Message as MessageType } from '@/enitites/message';
 import { useChatStore } from '@/shared';
 import { TypingIndicator } from '@/shared/components';
 import { formatQuestionDate } from '@/shared/lib/utils';
+
+import { EvaMessage } from './components/EvaMessage';
+import { UserMessage } from './components/UserMessage';
 import styles from './Message.module.css';
 
 interface Props {

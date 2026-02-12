@@ -1,9 +1,12 @@
 import { FC, memo } from 'react';
-import styles from './GeneratedImageContent.module.css';
+
+import { DownloadIcon, RefreshCwIcon } from 'lucide-react';
+
+import { useGeneratedImage } from '@/enitites/image';
 import { MessageTitleRequest } from '@/enitites/message';
 import { Button, downloadImage } from '@/shared';
-import { DownloadIcon, RefreshCwIcon } from 'lucide-react';
-import { useGeneratedImage } from '@/enitites/image';
+
+import styles from './GeneratedImageContent.module.css';
 
 interface Props {
   request: MessageTitleRequest;
@@ -18,11 +21,6 @@ export const GeneratedImageContent: FC<Props> = memo(({ request }) => {
       <div className={styles.skeletonWrapper}>
         <div className={styles.skeleton}>
           <div className={styles.skeletonShimmer} />
-        </div>
-        <div className={styles.skeletonFooter}>
-          <div className={styles.skeletonDot} />
-          <div className={styles.skeletonDot} />
-          <div className={styles.skeletonDot} />
         </div>
       </div>
     );

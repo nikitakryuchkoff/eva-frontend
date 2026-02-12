@@ -1,6 +1,8 @@
-import { type MentionEmployee, useFetchUsers } from '@/enitites/user';
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
+
 import { debounce } from 'lodash';
+
+import { type MentionEmployee, useFetchUsers } from '@/enitites/user';
 import { DEBOUNCE_MS } from '@/shared';
 
 interface UseMentionOptions {

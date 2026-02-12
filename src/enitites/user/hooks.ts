@@ -1,5 +1,7 @@
-import { QUERY_KEYS } from '@/shared';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+
+import { QUERY_KEYS } from '@/shared';
+
 import { fetchEmail, fetchName, fetchUsers } from './api';
 
 export const useFetchMe = () => {

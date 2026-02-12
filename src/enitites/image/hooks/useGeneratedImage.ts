@@ -1,6 +1,8 @@
+import { useQuery } from '@tanstack/react-query';
+
 import { MessageTitleRequest } from '@/enitites/message';
 import { QUERY_KEYS } from '@/shared';
-import { useQuery } from '@tanstack/react-query';
+
 import { fetchImage } from '../api';
 
 export const useGeneratedImage = (requestData: MessageTitleRequest) => {

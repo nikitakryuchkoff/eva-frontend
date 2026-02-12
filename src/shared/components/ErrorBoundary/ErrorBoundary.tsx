@@ -1,6 +1,8 @@
 import { Component, type ReactNode, type ErrorInfo } from 'react';
-import styles from './ErrorBoundary.module.css';
+
 import { Button } from '@/shared/ui';
+
+import styles from './ErrorBoundary.module.css';
 
 interface ErrorBoundaryProps {
   children: ReactNode;

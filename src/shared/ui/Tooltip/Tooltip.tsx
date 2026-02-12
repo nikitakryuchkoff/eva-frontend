@@ -1,5 +1,7 @@
 import { type FC, type ReactNode, useState, useRef, useEffect } from 'react';
+
 import classNames from 'classnames';
+
 import styles from './Tooltip.module.css';
 
 interface TooltipProps {

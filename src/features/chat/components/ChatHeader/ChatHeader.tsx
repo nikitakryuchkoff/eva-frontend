@@ -1,8 +1,11 @@
-import styles from './ChatHeader.module.css';
-import { Button, Dropdown, Select } from '@/shared/ui';
+import { X } from 'lucide-react';
+
 import { Integration, Integrations } from '@/enitites/integration';
 import { LINKS } from '@/shared';
-import { X } from 'lucide-react';
+import { Button, Dropdown, Select } from '@/shared/ui';
+
+import styles from './ChatHeader.module.css';
+
 
 export interface BotVersion {
   id: string;

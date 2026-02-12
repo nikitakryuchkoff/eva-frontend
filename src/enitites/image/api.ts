@@ -1,6 +1,8 @@
-import { axiosInstance } from '@/shared/api';
-import { MessageTitleRequest } from '../message';
 import { AxiosRequestConfig } from 'axios';
+
+import { axiosInstance } from '@/shared/api';
+
+import { MessageTitleRequest } from '../message';
 
 export const fetchImage = async (request: MessageTitleRequest) => {
   const { urlParams, method, url } = request;

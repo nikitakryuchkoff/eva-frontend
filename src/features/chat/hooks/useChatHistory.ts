@@ -1,7 +1,9 @@
+import { useEffect, useRef, useState } from 'react';
+
+import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
+
 import { fetchMessages, Messages } from '@/enitites/message';
 import { QUERY_KEYS, useChatStore } from '@/shared';
-import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
-import { useEffect, useRef, useState } from 'react';
 
 interface UseChatHistoryOptions {
   integrationId: string | null;

@@ -1,7 +1,9 @@
 import { useState, useCallback, type ReactElement } from 'react';
+
 import * as Popover from '@radix-ui/react-popover';
-import { ChevronDown, Check } from 'lucide-react';
 import classNames from 'classnames';
+import { ChevronDown, Check } from 'lucide-react';
+
 import styles from './Select.module.css';
 import { SelectOption, SelectProps } from './Select.typed';
 

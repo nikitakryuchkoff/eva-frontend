@@ -1,11 +1,13 @@
 import { type FC, useState, useCallback } from 'react';
-import { ThumbsUp, ThumbsDown, Copy, Check } from 'lucide-react';
-import classNames from 'classnames';
 
-import styles from './Feedback.module.css';
+import classNames from 'classnames';
+import { ThumbsUp, ThumbsDown, Copy, Check } from 'lucide-react';
+
 import { Message } from '@/enitites/message';
 import { useFeedback } from '@/enitites/message';
 import { Button, Tooltip } from '@/shared';
+
+import styles from './Feedback.module.css';
 
 interface FeedbackProps {
   messageId: string | number;

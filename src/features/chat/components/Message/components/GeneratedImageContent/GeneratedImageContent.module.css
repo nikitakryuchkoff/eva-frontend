@@ -41,39 +41,6 @@
   }
 }
 
-.skeletonFooter {
-  display: flex;
-  gap: var(--eva-space-2);
-}
-
-.skeletonDot {
-  width: 6px;
-  height: 6px;
-  border-radius: var(--eva-radius-full);
-  background: var(--eva-color-primary-300);
-  animation: pulse 1.4s ease-in-out infinite;
-}
-
-.skeletonDot:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.skeletonDot:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 0.3;
-    transform: scale(0.85);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 .errorWrapper {
   display: flex;
   align-items: center;

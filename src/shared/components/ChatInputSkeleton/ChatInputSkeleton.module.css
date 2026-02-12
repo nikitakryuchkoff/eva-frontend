@@ -1,0 +1,60 @@
+.wrap {
+  background: var(--eva-color-neutral-0);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 10px 12px 12px;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 17px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: var(--eva-color-neutral-100);
+  padding: 10px 12px;
+  min-height: 56px;
+  overflow: hidden;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 8px;
+  background: rgba(143, 150, 163, 0.42);
+  flex-shrink: 0;
+}
+
+.line {
+  height: 10px;
+  border-radius: var(--eva-radius-full);
+  background: rgba(143, 150, 163, 0.38);
+  width: min(58%, 340px);
+}
+
+.sendButton {
+  margin-left: auto;
+  width: 54px;
+  height: 40px;
+  border-radius: 11px;
+  background: var(--eva-color-neutral-800);
+  flex-shrink: 0;
+}
+
+.pulse {
+  position: relative;
+}
+
+.pulse::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 15%, rgba(255, 255, 255, 0.72) 45%, transparent 75%);
+  transform: translateX(-140%);
+  animation: chat-input-skeleton-shimmer 1.45s ease-in-out infinite;
+}
+
+@keyframes chat-input-skeleton-shimmer {
+  100% {
+    transform: translateX(140%);
+  }
+}

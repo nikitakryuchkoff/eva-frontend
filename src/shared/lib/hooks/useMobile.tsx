@@ -1,5 +1,6 @@
-import { useClientStore } from '@/shared/store';
 import { useEffect } from 'react';
+
+import { useClientStore } from '@/shared/store';
 
 export const useMobile = () => {
   useEffect(() => {

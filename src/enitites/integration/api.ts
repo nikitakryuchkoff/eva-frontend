@@ -1,4 +1,5 @@
 import { axiosInstance } from '@/shared/api';
+
 import { IntegrationsResponse } from './types';
 
 export const fetchIntegrations = async () => {

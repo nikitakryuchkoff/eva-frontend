@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from 'react';
+
 import classNames from 'classnames';
-import styles from './ChatInput.module.css';
 import { Send } from 'lucide-react';
+
+import styles from './ChatInput.module.css';
 import { useMention } from '../../hooks';
 import { UserList } from '../UserList/UserList';
 

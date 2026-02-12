@@ -1,7 +1,9 @@
 import { type FC, memo } from 'react';
+
 import { MessageButton } from '@/enitites/message';
-import styles from './ButtonGroup.module.css';
+
 import { Button } from '..';
+import styles from './ButtonGroup.module.css';
 
 interface Props {
   buttons: MessageButton[];

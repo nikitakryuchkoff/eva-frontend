@@ -1,20 +1,23 @@
 import { memo, useRef, useCallback, useState, useMemo } from 'react';
-import { useMutation } from '@tanstack/react-query';
-import { nanoid } from 'nanoid';
-import classNames from 'classnames';
-import { useChatStore, useClientStore } from '@/shared/store';
 
-import styles from './Chat.module.css';
+import { useMutation } from '@tanstack/react-query';
+import classNames from 'classnames';
+import { nanoid } from 'nanoid';
+
 import { Integration, useFetchIntegrations } from '@/enitites/integration';
 import { Message, sendMessage, sendMessageByButton, transformMessages } from '@/enitites/message';
+import { useFetchMe } from '@/enitites/user';
 import { useMobile } from '@/shared';
+import { ChatInputSkeleton, ChatSkeleton } from '@/shared/components';
 import { QUERY_KEYS } from '@/shared/consts';
+import { useChatStore, useClientStore } from '@/shared/store';
+import { MessageAuthor } from '@/shared/types';
+
+import styles from './Chat.module.css';
+import { useChatHistory, useGreeting } from '../../hooks';
 import { ChatHeader } from '../ChatHeader';
 import { ChatInput } from '../ChatInput';
-import { useChatHistory, useGreeting } from '../../hooks';
-import { MessageAuthor } from '@/shared/types';
-import { useFetchMe } from '@/enitites/user';
-import { VirtualizedChat } from '../VirtualizedChat/VirtualizedChat';
+import { VirtualizedChat } from '../VirtualizedChat';
 
 interface Props {
   source?: string;
@@ -215,37 +218,7 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
 
       <main className={styles.body}>
         {isLoading ? (
-          <div className={styles.loadingScene}>
-            <div className={styles.loadingList}>
-              {Array.from({ length: 6 }).map((_, index) => {
-                const isUserStub = index % 3 === 2;
-
-                return (
-                  <div
-                    key={index}
-                    className={classNames(
-                      styles.loadingItem,
-                      isUserStub ? styles.loadingItemRight : styles.loadingItemLeft,
-                    )}
-                  >
-                    <div
-                      className={classNames(
-                        styles.loadingBubble,
-                        isUserStub ? styles.loadingBubbleUser : styles.loadingBubbleBot,
-                        styles.loadingPulse,
-                      )}
-                    >
-                      <div className={classNames(styles.loadingLine, styles.loadingLineWide)} />
-                      <div className={classNames(styles.loadingLine, styles.loadingLineMedium)} />
-                      {!isUserStub && (
-                        <div className={classNames(styles.loadingLine, styles.loadingLineShort)} />
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+          <ChatSkeleton />
         ) : (
           <VirtualizedChat
             messages={transformedMessages}
@@ -263,13 +236,7 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
 
       <footer className={styles.footer}>
         {isLoading ? (
-          <div className={styles.loadingInputWrap}>
-            <div className={classNames(styles.loadingInputInner, styles.loadingPulse)}>
-              <div className={styles.loadingInputIcon} />
-              <div className={styles.loadingInputLine} />
-              <div className={styles.loadingSendButton} />
-            </div>
-          </div>
+          <ChatInputSkeleton />
         ) : (
           <ChatInput
             onSend={onSendMessage}

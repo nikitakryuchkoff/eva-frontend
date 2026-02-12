@@ -1,8 +1,11 @@
 import { forwardRef, useCallback, useRef, type ComponentPropsWithoutRef, type FC } from 'react';
-import { Virtuoso, type VirtuosoHandle } from 'react-virtuoso';
+
 import classNames from 'classnames';
-import { ErrorBoundary } from '@/shared/components';
+import { Virtuoso, type VirtuosoHandle } from 'react-virtuoso';
+
 import { Message } from '@/enitites/message';
+import { ErrorBoundary } from '@/shared/components';
+
 import { Message as MessageItem } from '../Message';
 import styles from './VirtualizedChat.module.css';
 

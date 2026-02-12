@@ -1,10 +1,14 @@
 import { type FC, memo, useCallback } from 'react';
+
 import classNames from 'classnames';
-import styles from './EvaMessage.module.css';
+
 import { Message, useMessageContent } from '@/enitites/message';
-import { MessageContent } from '../MessageContent';
-import { Feedback } from '../Feedback';
 import { Button } from '@/shared';
+
+import styles from './EvaMessage.module.css';
+import { Feedback } from '../Feedback';
+import { MessageContent } from '../MessageContent';
+
 
 interface Props {
   message: Message;

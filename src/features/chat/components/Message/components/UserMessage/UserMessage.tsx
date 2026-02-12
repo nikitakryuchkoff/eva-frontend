@@ -1,9 +1,11 @@
 import { type FC, memo } from 'react';
+
 import classNames from 'classnames';
 
-import styles from './UserMessage.module.css';
 import { Message } from '@/enitites/message';
 import { Markdown } from '@/shared';
+
+import styles from './UserMessage.module.css';
 
 interface Props {
   message: Message;
