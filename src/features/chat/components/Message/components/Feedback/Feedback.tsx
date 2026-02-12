@@ -53,7 +53,7 @@ export const Feedback: FC<FeedbackProps> = ({
           onClick={onLikeClick}
           disabled={isProcessing}
         >
-          <ThumbsUp size={12} strokeWidth={thumbUp ? 2.5 : 2} />
+          <ThumbsUp size={12} strokeWidth={2} />
         </Button>
       </Tooltip>
 
@@ -65,7 +65,7 @@ export const Feedback: FC<FeedbackProps> = ({
           onClick={onDislikeClick}
           disabled={isProcessing}
         >
-          <ThumbsDown size={12} strokeWidth={thumbDown ? 2.5 : 2} />
+          <ThumbsDown size={12} strokeWidth={2} />
         </Button>
       </Tooltip>
 
@@ -73,18 +73,11 @@ export const Feedback: FC<FeedbackProps> = ({
         <Button
           variant="ghost"
           size="sm"
-          className={classNames(styles.actionBtn, copied && styles.copyBtnActive)}
+          className={classNames(styles.actionBtn, copied && styles.actionBtnActive)}
           onClick={onCopyClick}
           disabled={isProcessing}
         >
-          {copied ? (
-            <>
-              <Check size={12} strokeWidth={2.5} />
-              <span className={styles.copiedText}>Скопировано</span>
-            </>
-          ) : (
-            <Copy size={12} strokeWidth={2} />
-          )}
+          {copied ? <Check size={12} strokeWidth={2} /> : <Copy size={12} strokeWidth={2} />}
         </Button>
       </Tooltip>
     </div>

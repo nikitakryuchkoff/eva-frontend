@@ -2,8 +2,8 @@ import { useCallback, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { nanoid } from 'nanoid';
 import { useChatStore } from '@/shared/store';
-import { Message, sendLikeDislike } from '../..';
-import { MessageAuthor, messageConverter, parseTextContent, REACTIONS } from '@/shared';
+import { Message, parseAnswerText, sendLikeDislike } from '../..';
+import { MessageAuthor, messageConverter, REACTIONS } from '@/shared';
 import { FEEDBACK_TEXT } from '@/shared/consts';
 
 interface UseFeedbackParams {
@@ -44,14 +44,13 @@ export const useFeedback = ({ messageId, thumbUp, thumbDown, message }: UseFeedb
   }, [addMessage, messageId, mutateAsync]);
 
   const handleCopy = useCallback(async () => {
-    const parsed = parseTextContent(message);
-    const raw = parsed?.additionalInfo?.split('<xbtn')[0] ?? message.answerText ?? '';
-    const html = messageConverter(raw);
+    const { messages } = parseAnswerText(message.answerText);
+    const html = messageConverter(messages);
 
     await navigator.clipboard.write([
       new ClipboardItem({
         'text/html': new Blob([html], { type: 'text/html' }),
-        'text/plain': new Blob([raw], { type: 'text/plain' }),
+        'text/plain': new Blob([html], { type: 'text/plain' }),
       }),
     ]);
   }, [message]);

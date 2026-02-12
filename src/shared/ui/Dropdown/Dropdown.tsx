@@ -5,22 +5,27 @@ import classNames from 'classnames';
 import styles from './Dropdown.module.css';
 import { Button } from '..';
 
-interface DropdownItem {
-  id: string;
-  label: string;
-  icon: LucideIcon;
-  variant?: string | undefined;
-  onClick?: (() => void) | undefined;
-}
-
 interface Props {
-  items: DropdownItem[];
+  items: {
+    id: string;
+    label: string;
+    icon: LucideIcon;
+    variant?: string | undefined;
+    onClick?: (() => void) | undefined;
+  }[];
   onSelect?: (id: string) => void;
   align?: 'end' | 'center' | 'start';
   sideOffset?: number;
+  title?: string;
 }
 
-export const Dropdown: FC<Props> = ({ items, onSelect, align = 'end', sideOffset = 8 }) => {
+export const Dropdown: FC<Props> = ({
+  items,
+  onSelect,
+  align = 'end',
+  sideOffset = 8,
+  title = 'Обратная связь',
+}) => {
   const handleSelect = useCallback(
     (id: string, itemOnClick?: () => void) => {
       itemOnClick?.();
@@ -39,8 +44,7 @@ export const Dropdown: FC<Props> = ({ items, onSelect, align = 'end', sideOffset
 
       <DropdownMenu.Portal>
         <DropdownMenu.Content align={align} sideOffset={sideOffset} className={styles.content}>
-          <div className={styles.header}>Обратная связь</div>
-          <DropdownMenu.Separator className={styles.separator} />
+          <div className={styles.header}>{title}</div>
 
           {items.map((item) => (
             <DropdownMenu.Item

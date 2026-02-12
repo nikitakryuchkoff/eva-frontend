@@ -1,49 +1,49 @@
 :root,
 #eva-chat-container,
 :host {
-  --eva-color-primary-50: #f0f6ff;
-  --eva-color-primary-100: #dce9ff;
-  --eva-color-primary-200: #b9d2ff;
-  --eva-color-primary-300: #8fb6ff;
-  --eva-color-primary-400: #5e8fff;
-  --eva-color-primary-500: #2f6bff;
-  --eva-color-primary-600: #2157e6;
-  --eva-color-primary-700: #1842c0;
-  --eva-color-primary-800: #123094;
-  --eva-color-primary-900: #0b1f66;
+  --eva-color-primary-50: #EFF1F4;
+  --eva-color-primary-100: #D6E6FC;
+  --eva-color-primary-200: #D5E6FF;
+  --eva-color-primary-300: #D5E6FF;
+  --eva-color-primary-400: #D6E6FC;
+  --eva-color-primary-500: #D6E6FC;
+  --eva-color-primary-600: #43444F;
+  --eva-color-primary-700: #43444F;
+  --eva-color-primary-800: #1B1F27;
+  --eva-color-primary-900: #1B1F27;
 
-  --eva-color-success: #10b981;
-  --eva-color-success-light: #ecfdf5;
-  --eva-color-warning: #f59e0b;
-  --eva-color-warning-light: #fffbeb;
-  --eva-color-error: #ef4444;
-  --eva-color-error-light: #fef2f2;
-  --eva-color-info: #3b82f6;
-  --eva-color-info-light: #eff6ff;
+  --eva-color-success: #43444F;
+  --eva-color-success-light: #EFF1F4;
+  --eva-color-warning: #43444F;
+  --eva-color-warning-light: #EFF1F4;
+  --eva-color-error: #43444F;
+  --eva-color-error-light: #EFF1F4;
+  --eva-color-info: #43444F;
+  --eva-color-info-light: #EFF1F4;
 
-  --eva-color-neutral-0: #ffffff;
-  --eva-color-neutral-50: #f6f8fb;
-  --eva-color-neutral-100: #eef1f6;
-  --eva-color-neutral-200: #e2e6ee;
-  --eva-color-neutral-300: #cbd3de;
-  --eva-color-neutral-400: #98a3b3;
-  --eva-color-neutral-500: #6b7687;
-  --eva-color-neutral-600: #4f5a6b;
-  --eva-color-neutral-700: #384050;
-  --eva-color-neutral-800: #232936;
-  --eva-color-neutral-900: #141922;
+  --eva-color-neutral-0: #FFFFFF;
+  --eva-color-neutral-50: #EFF1F4;
+  --eva-color-neutral-100: #E7E7E7;
+  --eva-color-neutral-200: #D5E6FF;
+  --eva-color-neutral-300: #D5E6FF;
+  --eva-color-neutral-400: #8F96A3;
+  --eva-color-neutral-500: #8F96A3;
+  --eva-color-neutral-600: #43444F;
+  --eva-color-neutral-700: #43444F;
+  --eva-color-neutral-800: #1B1F27;
+  --eva-color-neutral-900: #43444F;
 
-  --eva-color-user-bubble: #e8f1ff;
-  --eva-color-user-bubble-text: #1b2a40;
-  --eva-color-bot-bubble: #ffffff;
-  --eva-color-bot-bubble-text: #1f2937;
-  --eva-color-operator-bubble: #e9faf2;
-  --eva-color-operator-bubble-text: #1f5e4a;
-  --eva-color-system-message: #f3f5f9;
-  --eva-color-system-message-text: #5a6475;
+  --eva-color-user-bubble: #D6E6FC;
+  --eva-color-user-bubble-text: #43444F;
+  --eva-color-bot-bubble: #EFF1F4;
+  --eva-color-bot-bubble-text: #43444F;
+  --eva-color-operator-bubble: #EFF1F4;
+  --eva-color-operator-bubble-text: #43444F;
+  --eva-color-system-message: #EFF1F4;
+  --eva-color-system-message-text: #8F96A3;
 
-  --eva-font-family: 'Manrope', 'Space Grotesk', sans-serif;
-  --eva-font-family-display: 'Space Grotesk', 'Manrope', sans-serif;
+  --eva-font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --eva-font-family-display: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --eva-font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   --eva-font-size-xs: 12px;
@@ -59,7 +59,7 @@
   --eva-font-weight-bold: 700;
 
   --eva-line-height-tight: 1.25;
-  --eva-line-height-normal: 1.5;
+  --eva-line-height-normal: 1.45;
   --eva-line-height-relaxed: 1.75;
 
   --eva-space-0: 0;
@@ -79,10 +79,10 @@
   --eva-radius-xl: 18px;
   --eva-radius-full: 9999px;
 
-  --eva-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.08);
-  --eva-shadow-md: 0 6px 16px rgba(15, 23, 42, 0.08);
-  --eva-shadow-lg: 0 16px 32px rgba(15, 23, 42, 0.12);
-  --eva-shadow-xl: 0 24px 48px rgba(15, 23, 42, 0.16);
+  --eva-shadow-sm: 0 1px 0 rgba(0, 0, 0, 0.03);
+  --eva-shadow-md: 0 6px 16px rgba(0, 0, 0, 0.08);
+  --eva-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.10);
+  --eva-shadow-xl: 0 18px 40px rgba(0, 0, 0, 0.10);
 
   --eva-z-dropdown: 100;
   --eva-z-sticky: 150;

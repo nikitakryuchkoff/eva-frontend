@@ -1,8 +1,7 @@
 import { type FC, memo, useCallback } from 'react';
 import classNames from 'classnames';
 import styles from './EvaMessage.module.css';
-import { Message } from '@/enitites/message';
-import { useMessageContent } from '@/enitites/message/lib/hooks';
+import { Message, useMessageContent } from '@/enitites/message';
 import { MessageContent } from '../MessageContent';
 import { Feedback } from '../Feedback';
 import { Button } from '@/shared';
@@ -56,16 +55,15 @@ export const EvaMessage: FC<Props> = memo(
                 <Button
                   key={`${btn.category}-${idx}`}
                   type="button"
-                  className={styles.actionBtn}
                   onClick={() => handleButtonClick(btn.category, btn.text)}
                   data-spec={`messages-btn-${idx}`}
-                  variant="outline"
+                  variant="chat"
                 >
                   {btn.text}
                 </Button>
               ))}
               {showResetContext && (
-                <Button variant="outline" onClick={onResetContext}>
+                <Button type="button" variant="chat" onClick={onResetContext}>
                   Сбросить контекст
                 </Button>
               )}

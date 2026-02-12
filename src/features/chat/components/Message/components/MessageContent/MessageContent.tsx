@@ -1,10 +1,10 @@
 import { type FC, memo } from 'react';
 
 import styles from './MessageContent.module.css';
-import { useMessageContent } from '@/enitites/message/lib/hooks';
 import { TextContent } from '../TextContent';
 import { GeneratedImageContent } from '../GeneratedImageContent';
 import { AdditionalContent } from '../AdditionalContent';
+import { useMessageContent } from '@/enitites/message';
 
 interface Props {
   content: ReturnType<typeof useMessageContent>;

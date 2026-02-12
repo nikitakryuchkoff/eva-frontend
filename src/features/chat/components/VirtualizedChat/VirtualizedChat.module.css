@@ -1,36 +1,64 @@
 .chat {
   flex: 1;
-  min-height: 0;
-  overflow: hidden;
+  min-height: 1px;
   background: var(--eva-color-neutral-0);
   scrollbar-gutter: stable;
 }
 
 .loaderText {
-  font-size: var(--eva-font-size-sm);
-  color: var(--eva-color-neutral-600);
+  position: relative;
+  z-index: 1;
+  padding: 4px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: var(--eva-radius-full);
+  background: var(--eva-color-neutral-0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  font-size: var(--eva-font-size-xs);
+  color: var(--eva-color-neutral-500);
 }
 
 .historyLoader {
+  position: relative;
   display: flex;
   justify-content: center;
-  padding: 8px 0 12px;
+  padding: 6px 0 10px;
+}
+
+.historyLoader::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  border-top: 1px solid var(--eva-color-neutral-200);
 }
 
 .virtuosoList {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 }
 
 .listItem {
-  --message-gap: 0px;
-  width: min(100%, 700px);
+  --message-gap: 0;
+  width: min(100%, 760px);
   margin: 0 auto;
 }
 
-@media (max-width: 480px) {
+.listItem + .listItem {
+  margin-top: 14px;
+}
+
+.listItem:last-child {
+  padding-bottom: 12px;
+}
+
+@media (max-width: 767px) {
+  .listItem + .listItem {
+    margin-top: 12px;
+  }
+
   .chat {
-    border-radius: 0;
+    padding: 12px 10px 10px;
   }
 }

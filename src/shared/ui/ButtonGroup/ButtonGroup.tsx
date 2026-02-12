@@ -15,11 +15,11 @@ export const ButtonGroup: FC<Props> = memo(({ buttons, disabled, onClick }) => (
       <Button
         key={`${btn.category}-${idx}`}
         type="button"
-        className={styles.actionBtn}
         disabled={disabled}
         onClick={() => onClick?.(btn.category, btn.text)}
         data-spec={`messages-btn-${idx}`}
-        variant="outline"
+        variant="chat"
+        fullWidth
       >
         {btn.text}
       </Button>

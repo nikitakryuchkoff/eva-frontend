@@ -1,26 +1,7 @@
 import { forwardRef } from 'react';
 import styles from './Button.module.css';
 import { ButtonProps } from './Button.typed';
-
-const Spinner = () => (
-  <svg
-    className={styles.spinner}
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle
-      cx="12"
-      cy="12"
-      r="10"
-      stroke="currentColor"
-      strokeWidth="3"
-      strokeLinecap="round"
-      strokeDasharray="32"
-      strokeDashoffset="12"
-    />
-  </svg>
-);
+import { Loader } from 'lucide-react';
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -53,7 +34,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <button ref={ref} type="button" disabled={isDisabled} className={buttonClass} {...props}>
-        {isLoading && <Spinner />}
+        {isLoading && <Loader />}
         {!isLoading && leftIcon && <span className={styles.icon}>{leftIcon}</span>}
         {children && <span className={styles.text}>{children}</span>}
         {!isLoading && rightIcon && <span className={styles.icon}>{rightIcon}</span>}

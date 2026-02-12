@@ -4,15 +4,15 @@
   height: 100vh;
   width: 100%;
   background: var(--eva-color-neutral-0);
-  border-radius: var(--eva-radius-lg);
-  border: 1px solid var(--eva-color-neutral-200);
+  border-radius: 19px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: var(--eva-shadow-lg);
   overflow: hidden;
   position: fixed;
   top: 0;
   right: 0;
   z-index: var(--eva-z-modal);
-  transition: all var(--eva-transition-normal);
+  transition: height var(--eva-transition-normal);
 }
 
 .container.minimized {
@@ -27,24 +27,22 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  background: var(--eva-color-neutral-0);
 }
 
 .loadingScene {
   flex: 1;
   overflow: hidden;
-  background:
-    radial-gradient(1100px 360px at -8% -15%, rgba(47, 107, 255, 0.14), transparent 58%),
-    radial-gradient(900px 280px at 108% -20%, rgba(16, 185, 129, 0.12), transparent 60%),
-    var(--eva-color-neutral-50);
-  padding: var(--eva-space-4) var(--eva-space-3) var(--eva-space-6);
+  background: var(--eva-color-neutral-0);
+  padding: 14px 16px 12px;
 }
 
 .loadingList {
-  width: min(100%, 700px);
+  width: min(100%, 760px);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: var(--eva-space-3);
+  gap: 10px;
 }
 
 .loadingItem {
@@ -62,32 +60,29 @@
 .loadingBubble {
   position: relative;
   overflow: hidden;
-  border-radius: var(--eva-radius-xl);
-  min-height: 58px;
-  padding: 12px 14px;
+  border-radius: 11px;
+  min-height: 44px;
+  padding: 11px 15px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  box-shadow: var(--eva-shadow-sm);
-  border: 1px solid transparent;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
 }
 
 .loadingBubbleBot {
-  width: min(88%, 460px);
-  background: linear-gradient(170deg, #ffffff 0%, #f5f8ff 100%);
-  border-color: var(--eva-color-neutral-200);
+  width: min(70%, 560px);
+  background: var(--eva-color-bot-bubble);
 }
 
 .loadingBubbleUser {
-  width: min(74%, 380px);
-  background: linear-gradient(170deg, #e8f1ff 0%, #d7e7ff 100%);
-  border-color: rgba(94, 143, 255, 0.35);
+  width: min(70%, 560px);
+  background: var(--eva-color-user-bubble);
 }
 
 .loadingLine {
   height: 9px;
   border-radius: var(--eva-radius-full);
-  background: rgba(148, 163, 184, 0.28);
+  background: rgba(143, 150, 163, 0.38);
 }
 
 .loadingLineWide {
@@ -110,55 +105,50 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    110deg,
-    transparent 15%,
-    rgba(255, 255, 255, 0.75) 45%,
-    transparent 75%
-  );
+  background: linear-gradient(110deg, transparent 15%, rgba(255, 255, 255, 0.72) 45%, transparent 75%);
   transform: translateX(-140%);
   animation: chat-skeleton-shimmer 1.45s ease-in-out infinite;
 }
 
 .loadingInputWrap {
   background: var(--eva-color-neutral-0);
-  border-top: 1px solid var(--eva-color-neutral-200);
-  padding: var(--eva-space-3) var(--eva-space-4);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 10px 12px 12px;
 }
 
 .loadingInputInner {
   display: flex;
   align-items: center;
-  gap: 12px;
-  border-radius: var(--eva-radius-lg);
-  border: 1px solid var(--eva-color-neutral-200);
-  background: var(--eva-color-neutral-50);
-  padding: 8px 12px;
-  min-height: 52px;
+  gap: 10px;
+  border-radius: 17px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: var(--eva-color-neutral-100);
+  padding: 10px 12px;
+  min-height: 56px;
   overflow: hidden;
 }
 
 .loadingInputIcon {
-  width: 28px;
-  height: 28px;
-  border-radius: var(--eva-radius-md);
-  background: rgba(148, 163, 184, 0.3);
+  width: 20px;
+  height: 20px;
+  border-radius: 8px;
+  background: rgba(143, 150, 163, 0.42);
   flex-shrink: 0;
 }
 
 .loadingInputLine {
   height: 10px;
   border-radius: var(--eva-radius-full);
-  background: rgba(148, 163, 184, 0.28);
+  background: rgba(143, 150, 163, 0.38);
   width: min(58%, 340px);
 }
 
 .loadingSendButton {
   margin-left: auto;
-  width: 34px;
-  height: 34px;
-  border-radius: var(--eva-radius-md);
-  background: rgba(47, 107, 255, 0.28);
+  width: 54px;
+  height: 40px;
+  border-radius: 11px;
+  background: var(--eva-color-neutral-800);
   flex-shrink: 0;
 }
 
@@ -175,7 +165,16 @@
     max-height: 100vh;
     bottom: 0;
     right: 0;
-    border-radius: 0;
+    border-radius: 18px;
+  }
+
+  .loadingScene {
+    padding: 12px 10px 10px;
+  }
+
+  .loadingBubbleBot,
+  .loadingBubbleUser {
+    width: min(80%, 460px);
   }
 }
 

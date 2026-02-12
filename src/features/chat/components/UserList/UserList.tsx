@@ -13,6 +13,7 @@ interface MentionDropdownProps {
   fetchNextPage: () => Promise<unknown> | void;
   onSelect: (employee: MentionEmployee) => void;
   query: string;
+  isClosing?: boolean;
 }
 
 const ITEM_HEIGHT = 44;
@@ -26,6 +27,7 @@ export const UserList: FC<MentionDropdownProps> = ({
   fetchNextPage,
   onSelect,
   query,
+  isClosing = false,
 }) => {
   const virtuosoRef = useRef<VirtuosoHandle>(null);
 
@@ -104,9 +106,12 @@ export const UserList: FC<MentionDropdownProps> = ({
   };
 
   return (
-    <div className={styles.dropdown} role="listbox" aria-label="Список сотрудников для упоминания">
+    <div
+      className={classNames(styles.dropdown, isClosing && styles.dropdownClosing)}
+      role="listbox"
+    >
       <div className={styles.header}>
-        <span className={styles.title}>Сотрудники</span>
+        <span className={styles.title}>Выберите сотрудника</span>
         {query && <span className={styles.query}>@{query}</span>}
       </div>
       {renderContent()}

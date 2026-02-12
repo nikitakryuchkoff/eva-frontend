@@ -1,31 +1,33 @@
 .feedback {
-  margin-top: 8px;
+  margin-top: 12px;
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
 }
 
 .actionBtn {
+  width: 26px;
   min-width: 26px;
   height: 26px;
-  padding: 0 6px;
+  padding: 0;
   border-radius: 7px;
+  line-height: 0;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+  transform: none !important;
+}
+
+.actionBtn:active:not(:disabled) {
+  transform: none !important;
+}
+
+.actionBtn svg {
+  display: block;
 }
 
 .actionBtnActive {
   background: rgba(47, 107, 255, 0.12) !important;
   color: var(--eva-color-primary-600) !important;
-}
-
-.copyBtnActive {
-  min-width: auto;
-  padding: 0 8px;
-  background: rgba(16, 185, 129, 0.12) !important;
-  color: #047857 !important;
-}
-
-.copiedText {
-  font-size: 11px;
-  font-weight: var(--eva-font-weight-semibold);
-  line-height: 1;
 }

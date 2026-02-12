@@ -5,31 +5,3 @@
   width: 100%;
   margin-top: 6px;
 }
-
-.actionBtn {
-  width: 100%;
-  padding: 10px 14px;
-  background: var(--eva-color-neutral-0);
-  border: 1px solid var(--eva-color-neutral-200);
-  border-radius: var(--eva-radius-md);
-  color: var(--eva-color-neutral-800);
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: none;
-  cursor: pointer;
-  transition:
-    background 0.15s,
-    color 0.15s,
-    border-color 0.15s;
-}
-
-.actionBtn:hover:not(:disabled) {
-  background: var(--eva-color-primary-50);
-  color: var(--eva-color-primary-700);
-  border-color: var(--eva-color-primary-200);
-}
-
-.actionBtn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}

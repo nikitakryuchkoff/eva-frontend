@@ -62,7 +62,9 @@ export const useMention = ({ textareaRef }: UseMentionOptions) => {
 
       const before = text.slice(0, start);
       const after = text.slice(cursorPos);
-      const insertText = `@${employee.name} `;
+      const source = employee.source ?? 'E';
+      const code = String(employee.code ?? employee.id ?? employee.name);
+      const insertText = `[${source}:${code}|${employee.name}] `;
       const newValue = before + insertText + after;
       const newCursor = before.length + insertText.length;
 

@@ -15,7 +15,7 @@ export const Select = <T extends SelectOption>({
   align = 'center',
   sideOffset = 8,
   showStatus = false,
-  statusColor = '#22c55e',
+  statusColor = 'var(--eva-color-neutral-500)',
   renderOption,
   renderTrigger,
   className,

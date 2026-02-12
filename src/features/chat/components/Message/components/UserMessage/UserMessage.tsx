@@ -13,13 +13,13 @@ interface Props {
 export const UserMessage: FC<Props> = memo(({ message, timeLabel }) => {
   return (
     <div className={classNames(styles.message, styles.messageRight)}>
+      {timeLabel && <div className={classNames(styles.meta, styles.metaRight)}>{timeLabel}</div>}
+
       <div className={classNames(styles.bubble, styles.bubbleUser)}>
         <div className={styles.text}>
           <Markdown text={message?.question ?? ''} />
         </div>
       </div>
-
-      {timeLabel && <div className={classNames(styles.meta, styles.metaRight)}>{timeLabel}</div>}
     </div>
   );
 });

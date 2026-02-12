@@ -1,4 +1,4 @@
-import { useState, useRef, type KeyboardEvent } from 'react';
+import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from 'react';
 import classNames from 'classnames';
 import styles from './ChatInput.module.css';
 import { Send } from 'lucide-react';
@@ -15,6 +15,8 @@ interface InputAreaProps {
 export const ChatInput = ({ onSend, disabled }: InputAreaProps) => {
   const [value, setValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+  const [isMentionVisible, setIsMentionVisible] = useState(false);
+  const [isMentionClosing, setIsMentionClosing] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const {
@@ -56,6 +58,37 @@ export const ChatInput = ({ onSend, disabled }: InputAreaProps) => {
 
   const hasValue = value.trim().length > 0;
 
+  const handleInputWrapMouseDown = (event: MouseEvent<HTMLDivElement>) => {
+    if (disabled) return;
+
+    event.preventDefault();
+
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+
+    textarea.focus();
+    const cursorPos = textarea.value.length;
+    textarea.setSelectionRange(cursorPos, cursorPos);
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsMentionVisible(true);
+      setIsMentionClosing(false);
+      return;
+    }
+
+    if (!isMentionVisible) return;
+
+    setIsMentionClosing(true);
+    const timer = setTimeout(() => {
+      setIsMentionVisible(false);
+      setIsMentionClosing(false);
+    }, 220);
+
+    return () => clearTimeout(timer);
+  }, [isOpen, isMentionVisible]);
+
   const innerClassName = classNames(
     styles.inner,
     isFocused && styles.innerFocused,
@@ -65,7 +98,7 @@ export const ChatInput = ({ onSend, disabled }: InputAreaProps) => {
   return (
     <div className={styles.wrapper}>
       <div className={innerClassName}>
-        {isOpen && (
+        {isMentionVisible && (
           <UserList
             employees={employees}
             activeIndex={activeIndex}
@@ -75,10 +108,11 @@ export const ChatInput = ({ onSend, disabled }: InputAreaProps) => {
             fetchNextPage={fetchNextPage}
             onSelect={selectEmployee}
             query={query}
+            isClosing={isMentionClosing}
           />
         )}
 
-        <div className={styles.inputWrap}>
+        <div className={styles.inputWrap} onMouseDown={handleInputWrapMouseDown}>
           {!value && !isFocused && <span className={styles.placeholder}>Напишите сообщение</span>}
           <textarea
             ref={textareaRef}

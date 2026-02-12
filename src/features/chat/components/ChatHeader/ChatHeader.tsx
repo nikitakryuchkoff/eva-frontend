@@ -31,7 +31,6 @@ export const ChatHeader = ({
       value={currentIntegration}
       onChange={onChange}
       showStatus
-      statusColor="#22c55e"
       isLoading={isLoading}
     />
 
