@@ -1,12 +1,20 @@
 import { type FC, useCallback } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { MoreVertical } from 'lucide-react';
+import { MoreVertical, type LucideIcon } from 'lucide-react';
 import classNames from 'classnames';
 import styles from './Dropdown.module.css';
 import { Button } from '..';
 
+interface DropdownItem {
+  id: string;
+  label: string;
+  icon: LucideIcon;
+  variant?: string | undefined;
+  onClick?: (() => void) | undefined;
+}
+
 interface Props {
-  items: any[];
+  items: DropdownItem[];
   onSelect?: (id: string) => void;
   align?: 'end' | 'center' | 'start';
   sideOffset?: number;

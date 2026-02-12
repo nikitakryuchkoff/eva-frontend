@@ -1,0 +1,11 @@
+.title {
+  margin: 12px 0;
+  font-family: var(--eva-font-family-display);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}

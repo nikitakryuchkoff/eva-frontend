@@ -1,6 +1,6 @@
 import { type FC, memo } from 'react';
 
-import styles from '../../Message.module.css';
+import styles from './MessageContent.module.css';
 import { useMessageContent } from '@/enitites/message/lib/hooks';
 import { TextContent } from '../TextContent';
 import { GeneratedImageContent } from '../GeneratedImageContent';

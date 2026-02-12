@@ -4,8 +4,12 @@
   justify-content: space-between;
   height: 64px;
   padding: 0 16px;
-  border-bottom: 1px solid var(--eva-color-neutral-200);
-  background: var(--eva-color-neutral-0);
+  border-bottom: 1px solid rgba(226, 230, 238, 0.6);
+  background: rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 12px oklch(0 0 0 / 0.2);
 }
 
 .right {

@@ -1,6 +1,6 @@
 import { type FC, memo, useCallback } from 'react';
 import classNames from 'classnames';
-import styles from '../../Message.module.css';
+import styles from './EvaMessage.module.css';
 import { Message } from '@/enitites/message';
 import { useMessageContent } from '@/enitites/message/lib/hooks';
 import { MessageContent } from '../MessageContent';

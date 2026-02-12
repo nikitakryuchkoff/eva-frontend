@@ -1,4 +1,4 @@
-import { useFetchUsers } from '@/enitites/user';
+import { type MentionEmployee, useFetchUsers } from '@/enitites/user';
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { debounce } from 'lodash';
 import { DEBOUNCE_MS } from '@/shared';
@@ -52,7 +52,7 @@ export const useMention = ({ textareaRef }: UseMentionOptions) => {
   }, []);
 
   const selectEmployee = useCallback(
-    (employee: any) => {
+    (employee: MentionEmployee) => {
       const textarea = textareaRef.current;
       if (!textarea) return;
 

@@ -2,21 +2,16 @@ import { useCallback, useRef, type FC } from 'react';
 import classNames from 'classnames';
 import { Virtuoso, type VirtuosoHandle } from 'react-virtuoso';
 import styles from './UserList.module.css';
-
-interface Employee {
-  id?: string | number;
-  name: string;
-  source?: string;
-}
+import { type MentionEmployee } from '@/enitites/user';
 
 interface MentionDropdownProps {
-  employees: Employee[];
+  employees: MentionEmployee[];
   activeIndex: number;
   isLoading: boolean;
   isFetchingNextPage: boolean;
   hasNextPage?: boolean;
   fetchNextPage: () => Promise<unknown> | void;
-  onSelect: (employee: Employee) => void;
+  onSelect: (employee: MentionEmployee) => void;
   query: string;
 }
 

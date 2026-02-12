@@ -1,4 +1,5 @@
 import { axiosInstance } from '@/shared/api';
+import { MentionEmployee } from './types';
 
 export const fetchName = async () => {
   const { data } = await axiosInstance.get<string>('/eva/api/ChatBot/name');
@@ -13,7 +14,7 @@ export const fetchEmail = async () => {
 };
 
 export const fetchUsers = async (q: string, take: number, skip: number) => {
-  const { data } = await axiosInstance.get('eva/api/info/roster/find', {
+  const { data } = await axiosInstance.get<MentionEmployee[]>('eva/api/info/roster/find', {
     params: { q, take, skip, source: 'E' },
   });
 

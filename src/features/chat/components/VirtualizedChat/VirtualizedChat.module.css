@@ -2,8 +2,7 @@
   flex: 1;
   min-height: 0;
   overflow: hidden;
-  background: var(--eva-color-neutral-50);
-  padding: var(--eva-space-2) 0;
+  background: var(--eva-color-neutral-0);
   scrollbar-gutter: stable;
 }
 
@@ -28,7 +27,6 @@
   --message-gap: 0px;
   width: min(100%, 700px);
   margin: 0 auto;
-  padding-bottom: 8px;
 }
 
 @media (max-width: 480px) {

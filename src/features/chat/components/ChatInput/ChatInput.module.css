@@ -27,7 +27,6 @@
 .innerFocused {
   border-color: var(--eva-color-primary-300);
   background: var(--eva-color-neutral-0);
-  transform: translateY(-1px);
 }
 
 .innerDisabled {
@@ -109,11 +108,6 @@
 
 .sendButton:hover {
   background: linear-gradient(160deg, #3d78ff 0%, var(--eva-color-primary-600) 100%);
-  transform: translateY(-1px) scale(1.02);
-}
-
-.sendButton:active {
-  transform: translateY(0) scale(0.97);
 }
 
 .sendButton:disabled {

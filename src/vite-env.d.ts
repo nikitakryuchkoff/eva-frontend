@@ -22,7 +22,7 @@ interface Window {
   __EVA_CSS__?: string
   __EVA_CSS_MAP__?: Record<string, string>
   eva?: {
-    ipcSend: (channel: string, ...args: any[]) => void
+    ipcSend: (channel: string, ...args: unknown[]) => void
     openExternal?: (url: string) => Promise<void>
     platform?: string
   }

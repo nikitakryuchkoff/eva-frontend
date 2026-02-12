@@ -1,0 +1,3 @@
+.additionalContent img:not([class]) {
+  max-width: 128px;
+}

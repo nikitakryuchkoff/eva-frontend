@@ -1,6 +1,6 @@
 import { type FC, memo } from 'react';
 
-import styles from '../../Message.module.css';
+import styles from './AdditionalContent.module.css';
 import { Markdown } from '@/shared';
 
 interface Props {

@@ -22,7 +22,7 @@ declare global {
     EVA_API_URL: string;
     currentEvaUserName?: string;
     eva?: {
-      ipcSend: (channel: string, ...args: any[]) => void;
+      ipcSend: (channel: string, ...args: unknown[]) => void;
       openExternal?: (url: string) => Promise<void>;
       platform?: string;
     };

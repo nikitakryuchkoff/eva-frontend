@@ -34,7 +34,7 @@ axiosInstance.interceptors.response.use(
     const redirectUrl = response?.data?.redirectUrl;
 
     if (response.status === 200 && redirectUrl) {
-      const isElectron = Boolean((window as any).IS_STANDALONE);
+      const isElectron = Boolean(window.IS_STANDALONE);
 
       if (isElectron) {
         // window.eva?.ipcSend?.("open-auth-window", redirectUrl);
