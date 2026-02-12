@@ -1,53 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 @import './tokens.css';
 @import './reset.css';
-
-.eva-chat-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  background: var(--eva-color-neutral-0);
-  border-radius: var(--eva-radius-lg);
-  box-shadow: var(--eva-shadow-lg);
-  overflow: hidden;
-}
-
-.eva-chat-header {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--eva-space-4);
-  background: var(--eva-color-neutral-0);
-  border-bottom: 1px solid var(--eva-color-neutral-200);
-}
-
-.eva-chat-body {
-  flex: 1;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.eva-chat-footer {
-  flex-shrink: 0;
-  padding: var(--eva-space-4);
-  background: var(--eva-color-neutral-0);
-  border-top: 1px solid var(--eva-color-neutral-200);
-}
-
-.eva-sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
 
 @keyframes eva-fade-in {
   from {

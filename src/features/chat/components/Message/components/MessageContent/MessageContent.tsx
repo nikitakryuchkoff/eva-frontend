@@ -9,16 +9,11 @@ import { AdditionalContent } from '../AdditionalContent';
 interface Props {
   content: ReturnType<typeof useMessageContent>;
   isLast: boolean;
-  contentWidth?: number | undefined;
   onLinkClick?: ((e: React.MouseEvent, href: string) => void) | undefined;
 }
 
 export const MessageContent: FC<Props> = memo(({ content, isLast, onLinkClick }) => {
   const { title, showTitle, blocks, additionalText } = content;
-
-  // if (hasAction && actionData) {
-  //   return <ActionContent title={title} actionData={actionData} />;
-  // }
 
   if (additionalText && onLinkClick) {
     return <AdditionalContent html={additionalText} onLinkClick={onLinkClick} />;
@@ -29,7 +24,7 @@ export const MessageContent: FC<Props> = memo(({ content, isLast, onLinkClick })
       {showTitle && title && <h3 className={styles.title}>{title}</h3>}
 
       {blocks?.map((block) => {
-        const { id, request, text, classId } = block;
+        const { id, request, text } = block;
 
         const isImageBlock = !!request;
 
@@ -37,7 +32,7 @@ export const MessageContent: FC<Props> = memo(({ content, isLast, onLinkClick })
           return <GeneratedImageContent key={id} request={request} isLast={isLast} />;
         }
 
-        return <TextContent key={id} text={text} classId={classId} />;
+        return <TextContent key={id} text={text} />;
       })}
     </div>
   );

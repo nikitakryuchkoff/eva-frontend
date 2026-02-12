@@ -1,5 +1,6 @@
 import { Frown, Heart, Mail, MessageSquare } from 'lucide-react';
 import { REACTIONS } from '../types';
+import { getComplexUrl } from '../lib';
 
 export const STORAGE_KEYS = {
   IAM_TOKEN: 'IAM_TOKEN_STORAGE_KEY',
@@ -8,6 +9,8 @@ export const STORAGE_KEYS = {
 };
 
 export const DEBOUNCE_MS = 300;
+
+const MULTIPORPOSE_URL = `${getComplexUrl()}/front/modules/multipurpose/requests/create`;
 
 export const FEEDBACK_TEXT: Record<REACTIONS, string> = {
   [REACTIONS.LIKE]: '',
@@ -21,23 +24,27 @@ export const LINKS = [
     label: 'Напишите нам',
     icon: Mail,
     variant: 'default',
+    href: 'mailto:evafeedback@sbertech.ru',
   },
   {
     id: 'thanks',
     label: 'Оставить благодарность',
     icon: Heart,
     variant: 'default',
+    href: `${MULTIPORPOSE_URL}/677`,
   },
   {
     id: 'idea',
     label: 'Предложить идею',
     icon: MessageSquare,
     variant: 'default',
+    href: `${MULTIPORPOSE_URL}/675`,
   },
   {
     id: 'complaint',
     label: 'Пожаловаться',
     icon: Frown,
     variant: 'danger',
+    href: `${MULTIPORPOSE_URL}/678`,
   },
 ];

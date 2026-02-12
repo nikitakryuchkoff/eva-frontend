@@ -24,7 +24,7 @@ export const useGreeting = ({
   me,
   selectedIntegration,
 }: UseGreetingOptions) => {
-  const { messages, addMessage, setGreetingLoading, setThreadId } = useChatStore();
+  const { messages, addMessage, setThreadId } = useChatStore();
 
   const hasWelcome = messages.some((m) => m.id === MESSAGE_IDS.WELCOME);
 
@@ -33,10 +33,6 @@ export const useGreeting = ({
     queryFn: () => fetchGreting({ source, integrationId: integrationId!, threadId: null }),
     enabled: !!me && !!integrationId && !hasWelcome && !!selectedIntegration,
   });
-
-  useEffect(() => {
-    setGreetingLoading(isLoading);
-  }, [isLoading, setGreetingLoading]);
 
   useEffect(() => {
     if (!data) return;

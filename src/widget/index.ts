@@ -1,7 +1,7 @@
 import { createElement } from 'react';
 import { createRoot } from 'react-dom/client';
-import { WidgetApp } from './WidgetApp';
-import '@/styles/global.css';
+import { Eva } from './Eva';
+import '@/app/global.css';
 
 const DEFAULT_CONTAINER_SELECTOR = '#eva-chat-container';
 const SHADOW_STYLE_ID = 'eva-chat-style';
@@ -48,7 +48,7 @@ export const mountWidget = (container: string | HTMLElement = DEFAULT_CONTAINER_
   }
 
   const root = createRoot(mountNode);
-  root.render(createElement(WidgetApp, { shadowRoot }));
+  root.render(createElement(Eva, { shadowRoot }));
 
   const stylesObserver = new MutationObserver(() => {
     syncStyles(shadowRoot);

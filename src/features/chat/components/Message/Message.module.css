@@ -18,12 +18,6 @@
   align-items: flex-end;
 }
 
-.assistantMessage {
-  animation:
-    eva-fade-in 0.18s ease,
-    eva-slide-up 0.18s ease;
-}
-
 .meta {
   font-size: 11px;
   color: var(--eva-color-neutral-500);
@@ -33,10 +27,6 @@
   gap: 6px;
   letter-spacing: 0.01em;
   font-variant-numeric: tabular-nums;
-}
-
-.metaLeft {
-  margin-left: 6px;
 }
 
 .metaRight {
@@ -159,48 +149,6 @@
 
 .additionalContent img:not([class]) {
   max-width: 128px;
-}
-
-.actionContent {
-  font-size: var(--eva-font-size-sm);
-  line-height: var(--eva-line-height-normal);
-  color: var(--eva-color-neutral-700);
-}
-
-.generatedImagePlaceholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  min-height: 200px;
-  background: var(--eva-color-neutral-50);
-  border-radius: var(--eva-radius-lg);
-  padding: 24px;
-}
-
-.generatedImageProgress {
-  font-size: 13px;
-  color: var(--eva-color-neutral-500);
-}
-
-.generatedImage {
-  border-radius: var(--eva-radius-lg);
-  width: 100%;
-  max-width: 500px;
-  max-height: 250px;
-  margin-bottom: 5px;
-  object-fit: contain;
-}
-
-.ratingBlock {
-  margin-top: 8px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .assistantMessage {
-    animation: none;
-  }
 }
 
 .actionsButtons {

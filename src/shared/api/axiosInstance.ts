@@ -1,9 +1,11 @@
 import axios, { AxiosRequestHeaders } from 'axios';
 import { STORAGE_KEYS } from '../consts';
 
+const evaApiUrl = typeof window !== 'undefined' ? window.EVA_API_URL : '';
+
 export const axiosInstance = axios.create({
-  baseURL: 'https://evatest.zk-dev-new.sbt/eva-bpmx-gateway/',
   withCredentials: true,
+  ...(evaApiUrl ? { baseURL: evaApiUrl } : {}),
 });
 
 axiosInstance.interceptors.request.use(

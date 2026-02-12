@@ -5,7 +5,6 @@ const EMPTY_CONTENT = {
   messages: [],
   buttons: [],
   additionalInfo: null,
-  action: null,
 };
 
 export const parseAnswerText = (answerText: string) => {
@@ -16,8 +15,8 @@ export const parseAnswerText = (answerText: string) => {
       return parsed as MessageTextContent;
     }
 
-    return { ...EMPTY_CONTENT, messages: [{ text: answerText, classId: '1', request: null }] };
+    return { ...EMPTY_CONTENT, messages: [{ text: answerText, request: null }] };
   } catch {
-    return { ...EMPTY_CONTENT, messages: [{ text: answerText, classId: '1', request: null }] };
+    return { ...EMPTY_CONTENT, messages: [{ text: answerText, request: null }] };
   }
 };

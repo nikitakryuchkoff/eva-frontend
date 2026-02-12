@@ -12,7 +12,6 @@ interface VirtualizedChatProps {
   hasMore: boolean;
   isFetchingMore: boolean;
   fetchNextPage: () => Promise<unknown> | void;
-  platform: string;
   onButtonClick: (category: string, text: string, context?: string) => void;
   isTyping: boolean;
   onError: () => void;
@@ -35,7 +34,6 @@ export const VirtualizedChat: FC<VirtualizedChatProps> = ({
   hasMore,
   isFetchingMore,
   fetchNextPage,
-  platform,
   onButtonClick,
   isTyping,
   onError,
@@ -78,10 +76,8 @@ export const VirtualizedChat: FC<VirtualizedChatProps> = ({
             <div className={styles.listItem}>
               <MessageItem
                 index={index - firstItemIndex}
-                total={messages.length}
                 message={item}
                 onButtonClick={onButtonClick}
-                platform={platform}
                 messages={messages}
                 isTyping={isTyping}
               />

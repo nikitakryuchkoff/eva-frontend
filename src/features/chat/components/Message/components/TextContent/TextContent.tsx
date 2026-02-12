@@ -4,7 +4,6 @@ import { Markdown } from '@/shared';
 
 interface Props {
   text: string;
-  classId: string;
 }
 
 export const TextContent: FC<Props> = memo(({ text }) => {

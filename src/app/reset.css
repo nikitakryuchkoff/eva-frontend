@@ -1,14 +1,5 @@
-:host {
-  display: block;
-  font-family: var(--eva-font-family);
-  font-size: var(--eva-font-size-md);
-  color: var(--eva-color-neutral-900);
-  line-height: var(--eva-line-height-normal);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-[data-eva-chat] {
+:host,
+#eva-chat-container {
   display: block;
   font-family: var(--eva-font-family);
   font-size: var(--eva-font-size-md);
@@ -20,90 +11,59 @@
 
 :host *,
 :host *::before,
-:host *::after {
+:host *::after,
+#eva-chat-container *,
+#eva-chat-container *::before,
+#eva-chat-container *::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
-[data-eva-chat] *,
-[data-eva-chat] *::before,
-[data-eva-chat] *::after {
-  box-sizing: border-box;
+:host p,
+#eva-chat-container p {
   margin: 0;
-  padding: 0;
 }
 
-:host a {
+:host a,
+#eva-chat-container a {
   color: var(--eva-color-primary-500);
   text-decoration: none;
 }
 
-[data-eva-chat] a {
-  color: var(--eva-color-primary-500);
-  text-decoration: none;
-}
-
-:host a:hover {
+:host a:hover,
+#eva-chat-container a:hover {
   text-decoration: underline;
 }
 
-[data-eva-chat] a:hover {
-  text-decoration: underline;
-}
-
-:host button {
+:host button,
+#eva-chat-container button {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
   cursor: pointer;
 }
 
-[data-eva-chat] button {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  cursor: pointer;
-}
-
-:host button:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-[data-eva-chat] button:disabled {
+:host button:disabled,
+#eva-chat-container button:disabled {
   cursor: not-allowed;
   opacity: 0.6;
 }
 
 :host input,
-:host textarea {
+:host textarea,
+#eva-chat-container input,
+#eva-chat-container textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
 }
 
-[data-eva-chat] input,
-[data-eva-chat] textarea {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-}
-
-:host img {
+:host img,
+#eva-chat-container img {
   max-width: 100%;
   height: auto;
 }
 
-[data-eva-chat] img {
-  max-width: 100%;
-  height: auto;
-}
-
-:host [hidden] {
-  display: none !important;
-}
-
-[data-eva-chat] [hidden] {
+:host [hidden],
+#eva-chat-container [hidden] {
   display: none !important;
 }

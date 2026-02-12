@@ -29,8 +29,6 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
     messages,
     threadId,
     context,
-    isTyping,
-    threadInFeedbackState,
     addMessage,
     setMessages,
     resetContext,
@@ -206,7 +204,6 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
     <div
       ref={containerRef}
       className={classNames(styles.container, isMinimized && styles.minimized)}
-      data-eva-chat
       data-minimized={isMinimized}
     >
       <ChatHeader
@@ -256,9 +253,8 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
             hasMore={hasMore}
             isFetchingMore={isFetchingMore}
             fetchNextPage={fetchNextPage}
-            platform={source}
             onButtonClick={onButtonClick}
-            isTyping={isSending || isTyping}
+            isTyping={isSending}
             onError={() => setHasListError(true)}
             onResetError={() => setHasListError(false)}
           />
@@ -277,7 +273,7 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
         ) : (
           <ChatInput
             onSend={onSendMessage}
-            disabled={threadInFeedbackState || isSending || hasListError || isHistoryLoading}
+            disabled={isSending || hasListError || isHistoryLoading}
           />
         )}
       </footer>

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { QueryProvider } from '@/providers';
+import { QueryProvider } from '@/app/providers';
 import { Chat } from '@/features/chat/components/Chat';
 import { useClientStore } from '@/shared';
 
@@ -11,7 +11,7 @@ interface WidgetAppProps {
   onClose?: (() => void) | undefined;
 }
 
-export const WidgetApp = ({ shadowRoot, onReady, onOpen, onClose }: WidgetAppProps) => {
+export const Eva = ({ shadowRoot, onReady, onOpen, onClose }: WidgetAppProps) => {
   const setOpen = useClientStore((s) => s.setOpen);
   const isOpen = useClientStore((s) => s.isOpen);
 

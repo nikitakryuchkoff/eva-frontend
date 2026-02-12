@@ -11,8 +11,6 @@ interface Props {
   message: MessageType;
   messages: MessageType[];
   index: number;
-  total: number;
-  platform: string;
   onButtonClick: (category: string, text: string, context?: string) => void;
   isTyping?: boolean;
 }
@@ -44,24 +42,10 @@ export const Message: FC<Props> = memo((props) => {
     );
   }
 
-  // if (isScoringMessage(message)) {
-  //   return (
-  //     <>
-  //       <ScoringBubble message={message} timeLabel={timeLabel} />
-  //       {showTypingIndicator && (
-  //         <div className={styles.typingWrap}>
-  //           <TypingIndicator />
-  //         </div>
-  //       )}
-  //     </>
-  //   );
-  // }
-
   if (isAssistantMessage(message)) {
     return (
       <>
         <EvaMessage
-          {...props}
           message={message}
           isLast={isLast}
           showResetContext={showResetContext}

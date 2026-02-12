@@ -178,12 +178,6 @@
   box-shadow: 0 3px 8px rgba(47, 107, 255, 0.18);
 }
 
-.avatarImg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .avatarFallback {
   font-family: var(--eva-font-family);
   font-size: var(--eva-font-size-xs);
@@ -205,19 +199,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.role {
-  font-size: var(--eva-font-size-xs);
-  color: var(--eva-color-neutral-500);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.highlight {
-  color: var(--eva-color-primary-600);
-  font-weight: var(--eva-font-weight-semibold);
 }
 
 .empty {

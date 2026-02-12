@@ -29,19 +29,6 @@
   position: relative;
 }
 
-.loader {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: var(--eva-space-2);
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(4px);
-  z-index: 1;
-}
-
 .loadingScene {
   flex: 1;
   overflow: hidden;
@@ -173,10 +160,6 @@
   border-radius: var(--eva-radius-md);
   background: rgba(47, 107, 255, 0.28);
   flex-shrink: 0;
-}
-
-.sentinel {
-  height: 1px;
 }
 
 .footer {

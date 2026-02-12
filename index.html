@@ -31,6 +31,21 @@
   <body>
     <div id="eva-chat-container"></div>
 
+    <script src="/env.local.js"></script>
+
+    <script>
+      window.COMPLEX_API_URL = window.env?.COMPLEX_API_URL || '';
+      window.EVA_API_URL = window.env?.EVA_API_URL || '';
+      window.IS_STANDALONE = window.env?.IS_STANDALONE;
+
+      window.EVA_IS_WEB_FN = window.env?.EVA_IS_WEB_FN;
+      window.EVA_ON_OPENLINK_FN = window.env?.EVA_ON_OPENLINK_FN;
+      window.EVA_ON_OPEN_FN = window.env?.EVA_ON_OPEN_FN;
+      window.EVA_ON_CLOSE_FN = window.env?.EVA_ON_CLOSE_FN;
+      window.EVA_OPEN_BROWSER_FN = window.env?.EVA_OPEN_BROWSER_FN;
+      window.EVA_PLATFORM = window.env?.EVA_PLATFORM;
+    </script>
+
     <script type="module" src="/src/app/App.tsx"></script>
   </body>
 </html>

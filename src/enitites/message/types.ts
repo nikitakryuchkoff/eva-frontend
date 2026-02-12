@@ -76,7 +76,6 @@ export type MessageResponse = {
 };
 
 export type ParsedTextItem = {
-  classId: string;
   text: string;
   request?: ImageRequest;
   bold?: string[];
@@ -92,15 +91,13 @@ export type MessageTitleRequest = {
 };
 
 export type MessageTextContent = {
-  title: string;
+  title: string | null;
   messages: {
     text: string;
-    classId: string;
     request: MessageTitleRequest | null;
   }[];
   buttons: MessageButton[];
   additionalInfo: string | null;
-  action: string | null;
 };
 
 export const isUserMessage = (msg: Message) => msg.author === MessageAuthor.USER;

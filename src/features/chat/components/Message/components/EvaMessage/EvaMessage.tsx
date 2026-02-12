@@ -9,27 +9,17 @@ import { Button } from '@/shared';
 
 interface Props {
   message: Message;
-  messages: Message[];
-  index: number;
-  platform: string;
-  contentWidth?: number;
   onButtonClick?: (category: string, text: string, context?: string) => void;
-  onPrefillInput?: (text: string) => void;
-  onCloseOperatorChat?: () => void;
   onResetContext?: () => void;
-  onLoadAction?: (data: { type: string; name: string; title: string }) => void;
   onLinkClick?: (e: React.MouseEvent, href: string) => void;
-  baseFileUrl?: string;
   isLast: boolean;
   showResetContext: boolean;
   timeLabel?: string | null;
-  disableEntryAnimation?: boolean;
 }
 
 export const EvaMessage: FC<Props> = memo(
   ({
     message,
-    contentWidth,
     onButtonClick,
     showResetContext,
     onLinkClick,
@@ -57,12 +47,7 @@ export const EvaMessage: FC<Props> = memo(
 
         <div className={styles.assistantBody}>
           <div className={classNames(styles.bubble, styles.bubbleBot)}>
-            <MessageContent
-              content={content}
-              isLast={isLast}
-              contentWidth={contentWidth}
-              onLinkClick={onLinkClick}
-            />
+            <MessageContent content={content} isLast={isLast} onLinkClick={onLinkClick} />
           </div>
 
           {buttons.length > 0 && (
