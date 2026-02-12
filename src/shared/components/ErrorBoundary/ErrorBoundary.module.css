@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--eva-space-8);
+  height: 100%;
+  text-align: center;
+  background: var(--eva-color-neutral-0);
+  border: 1px solid var(--eva-color-neutral-200);
+  border-radius: var(--eva-radius-xl);
+  box-shadow: var(--eva-shadow-sm);
+  margin: var(--eva-space-4);
+}
+
+.icon {
+  font-size: 48px;
+  margin-bottom: var(--eva-space-4);
+}
+
+.title {
+  margin: 0 0 var(--eva-space-2);
+  font-size: var(--eva-font-size-lg);
+  font-weight: var(--eva-font-weight-semibold);
+  color: var(--eva-color-neutral-900);
+}
+
+.message {
+  margin: 0 0 var(--eva-space-4);
+  font-size: var(--eva-font-size-sm);
+  color: var(--eva-color-neutral-600);
+  max-width: 280px;
+}

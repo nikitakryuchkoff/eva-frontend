@@ -1,0 +1,179 @@
+.skeletonWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--eva-space-3);
+  width: 100%;
+}
+
+.skeleton,
+.errorContainer {
+  width: 200px;
+  height: 200px;
+  border-radius: var(--eva-radius-lg);
+}
+
+.skeleton {
+  position: relative;
+  background: var(--eva-color-neutral-100);
+  overflow: hidden;
+}
+
+.skeletonShimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 25%,
+    var(--eva-color-primary-50) 37%,
+    transparent 50%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.skeletonFooter {
+  display: flex;
+  gap: var(--eva-space-2);
+}
+
+.skeletonDot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--eva-radius-full);
+  background: var(--eva-color-primary-300);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.skeletonDot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.skeletonDot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.errorWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.errorContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--eva-space-3);
+  background: var(--eva-color-error-light);
+  border: 1.5px dashed var(--eva-color-error);
+  overflow: hidden;
+}
+
+.errorText {
+  font-family: var(--eva-font-family);
+  font-size: var(--eva-font-size-sm);
+  font-weight: var(--eva-font-weight-medium);
+  color: var(--eva-color-neutral-600);
+  text-align: center;
+}
+
+.imageWrapper {
+  display: inline-flex;
+  justify-content: center;
+}
+
+.imageContainer {
+  position: relative;
+  display: inline-block;
+  border-radius: var(--eva-radius-lg);
+}
+
+.generatedImage {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 200px;
+  border-radius: var(--eva-radius-lg);
+  object-fit: contain;
+}
+
+.errorContainer::after,
+.imageContainer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--eva-transition-fast);
+}
+
+.errorContainer:hover::after,
+.errorContainer:focus-within::after,
+.imageContainer:hover::after,
+.imageContainer:focus-within::after {
+  opacity: 1;
+}
+
+.errorRetryButton,
+.downloadButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, calc(-50% - 4px));
+  transition:
+    opacity var(--eva-transition-fast),
+    transform var(--eva-transition-fast);
+  box-shadow: var(--eva-shadow-sm);
+}
+
+.errorContainer:hover .errorRetryButton,
+.errorContainer:focus-within .errorRetryButton,
+.imageContainer:hover .downloadButton,
+.imageContainer:focus-within .downloadButton {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+}
+
+@media (hover: none) {
+  .errorRetryButton,
+  .downloadButton {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%);
+  }
+}

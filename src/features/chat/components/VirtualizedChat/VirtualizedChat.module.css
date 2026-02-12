@@ -1,0 +1,38 @@
+.chat {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--eva-color-neutral-50);
+  padding: var(--eva-space-2) 0;
+  scrollbar-gutter: stable;
+}
+
+.loaderText {
+  font-size: var(--eva-font-size-sm);
+  color: var(--eva-color-neutral-600);
+}
+
+.historyLoader {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0 12px;
+}
+
+.virtuosoList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.listItem {
+  --message-gap: 0px;
+  width: min(100%, 700px);
+  margin: 0 auto;
+  padding-bottom: 8px;
+}
+
+@media (max-width: 480px) {
+  .chat {
+    border-radius: 0;
+  }
+}

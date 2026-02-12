@@ -1,0 +1,25 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-recess-order"],
+  "rules": {
+    "custom-property-pattern": [
+      "^([a-z][a-z0-9]*)(-[a-z0-9]+)*$",
+      {
+        "message": "Expected custom property name to be kebab-case"
+      }
+    ],
+    "no-descending-specificity": null,
+    "no-duplicate-selectors": true,
+    "color-hex-length": "short",
+    "property-no-vendor-prefix": true,
+    "value-no-vendor-prefix": true,
+    "function-url-quotes": "always",
+    "font-weight-notation": "numeric",
+    "font-family-name-quotes": "always-unless-keyword",
+    "comment-whitespace-inside": "always",
+    "comment-empty-line-before": "always",
+    "at-rule-no-vendor-prefix": true,
+    "rule-empty-line-before": "always-multi-line",
+    "selector-no-vendor-prefix": true,
+    "at-rule-no-unknown": null
+  }
+}

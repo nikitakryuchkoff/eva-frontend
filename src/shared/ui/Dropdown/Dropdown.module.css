@@ -1,0 +1,123 @@
+.content {
+  min-width: 220px;
+  padding: 6px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow:
+    0 10px 38px -10px rgba(22, 23, 24, 0.35),
+    0 10px 20px -15px rgba(22, 23, 24, 0.2);
+  animation: slideDownAndFade 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+  z-index: 9999;
+}
+
+.header {
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.separator {
+  height: 1px;
+  margin: 4px 8px;
+  background: #e5e7eb;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #374151;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  transition: all 0.15s ease;
+}
+
+.item:hover,
+.item[data-highlighted] {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  transition: all 0.15s ease;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
+.item:hover .iconWrap,
+.item[data-highlighted] .iconWrap {
+  transform: scale(1.05);
+}
+
+.iconcontact {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  color: #2563eb;
+}
+
+.item:hover .iconcontact,
+.item[data-highlighted] .iconcontact {
+  background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%);
+}
+
+.iconthanks {
+  background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+  color: #db2777;
+}
+
+.item:hover .iconthanks,
+.item[data-highlighted] .iconthanks {
+  background: linear-gradient(135deg, #fbcfe8 0%, #f9a8d4 100%);
+}
+
+.iconidea {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  color: #059669;
+}
+
+.item:hover .iconidea,
+.item[data-highlighted] .iconidea {
+  background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 100%);
+}
+
+.iconcomplaint {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  color: #dc2626;
+}
+
+.item:hover .iconcomplaint,
+.item[data-highlighted] .iconcomplaint {
+  background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+}
+
+.itemText {
+  font-weight: 500;
+}
+
+@keyframes slideDownAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
