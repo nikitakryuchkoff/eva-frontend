@@ -3,6 +3,7 @@ import { memo, useRef, useCallback, useState, useMemo } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import classNames from 'classnames';
 import { nanoid } from 'nanoid';
+import { VirtuosoHandle } from 'react-virtuoso';
 
 import { Integration, useFetchIntegrations } from '@/enitites/integration';
 import { Message, sendMessage, sendMessageByButton, transformMessages } from '@/enitites/message';
@@ -27,6 +28,7 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const isMinimized = useClientStore((s) => s.isMinimized);
+  const virtuosoRef = useRef<VirtuosoHandle>(null);
 
   const {
     messages,
@@ -70,6 +72,13 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
 
   const transformedMessages = useMemo(() => transformMessages(messages ?? []), [messages]);
 
+  const scrollToBottom = () => {
+    virtuosoRef.current?.scrollTo({
+      top: Number.MAX_SAFE_INTEGER,
+      behavior: 'smooth',
+    });
+  };
+
   const { mutateAsync: sendMessageMutation, isPending: isSending } = useMutation({
     mutationKey: [QUERY_KEYS.SEND_MESSAGE],
     mutationFn: sendMessage,
@@ -102,19 +111,15 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
     },
   });
 
-  const onIntegrationChange = useCallback(
-    (integration: Integration) => {
-      setSelectedIntegration(integration);
-      setMessages([]);
-      resetContext();
-    },
-    [resetContext, setMessages],
-  );
+  const onIntegrationChange = useCallback((integration: Integration) => {
+    setSelectedIntegration(integration);
+    setMessages([]);
+    resetContext();
+  }, []);
 
   const onSendMessage = useCallback(
     async (text: string) => {
-      const integrationId = selectedIntegration?.id;
-      if (!integrationId) return;
+      const integrationId = selectedIntegration?.id as string;
 
       const userMessage = {
         id: nanoid(),
@@ -148,14 +153,15 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
       } as Message;
 
       addMessage(assistantMessage);
+
+      scrollToBottom();
     },
-    [selectedIntegration?.id, threadId, context, source, addMessage, sendMessageMutation],
+    [selectedIntegration?.id, threadId, context, source],
   );
 
   const onButtonSend = useCallback(
     async (category: string, text: string) => {
-      const integrationId = selectedIntegration?.id;
-      if (!integrationId) return;
+      const integrationId = selectedIntegration?.id as string;
 
       const userMessage = {
         id: nanoid(),
@@ -190,16 +196,15 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
       } as Message;
 
       addMessage(assistantMessage);
+
+      scrollToBottom();
     },
-    [selectedIntegration?.id, source, threadId, context, addMessage, sendMessageByButtonMutation],
+    [selectedIntegration?.id, source, threadId, context, addMessage],
   );
 
-  const onButtonClick = useCallback(
-    (category: string, label: string) => {
-      onButtonSend(category, label);
-    },
-    [onButtonSend],
-  );
+  const onButtonClick = useCallback((category: string, label: string) => {
+    onButtonSend(category, label);
+  }, []);
 
   const isLoading = isMeLoading || isIntegrationsLoading || isHistoryLoading || isSayHelloLoading;
 
@@ -230,6 +235,7 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
             isTyping={isSending}
             onError={() => setHasListError(true)}
             onResetError={() => setHasListError(false)}
+            ref={virtuosoRef}
           />
         )}
       </main>

@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useRef, type ComponentPropsWithoutRef, type FC } from 'react';
+import { forwardRef, RefObject, useCallback, type ComponentPropsWithoutRef, type FC } from 'react';
 
 import classNames from 'classnames';
 import { Virtuoso, type VirtuosoHandle } from 'react-virtuoso';
@@ -19,6 +19,7 @@ interface VirtualizedChatProps {
   isTyping: boolean;
   onError: () => void;
   onResetError: () => void;
+  ref: RefObject<VirtuosoHandle | null>;
 }
 
 const VirtuosoList = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<'div'>>(
@@ -41,9 +42,8 @@ export const VirtualizedChat: FC<VirtualizedChatProps> = ({
   isTyping,
   onError,
   onResetError,
+  ref,
 }) => {
-  const virtuosoRef = useRef<VirtuosoHandle>(null);
-
   const handleStartReached = useCallback(() => {
     if (hasMore && !isFetchingMore) {
       fetchNextPage();
@@ -54,17 +54,13 @@ export const VirtualizedChat: FC<VirtualizedChatProps> = ({
     <div className={styles.chat}>
       <ErrorBoundary onError={onError} onReset={onResetError}>
         <Virtuoso
-          ref={virtuosoRef}
+          ref={ref}
           style={{ height: '100%' }}
           data={messages}
           computeItemKey={(_, item) => item.innerId}
           initialTopMostItemIndex={messages.length - 1}
           alignToBottom
           followOutput={(isAtBottom) => {
-            if (isTyping) {
-              return 'smooth';
-            }
-
             if (isAtBottom) {
               return 'smooth';
             } else {

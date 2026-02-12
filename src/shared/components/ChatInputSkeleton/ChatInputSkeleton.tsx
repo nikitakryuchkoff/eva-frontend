@@ -6,7 +6,6 @@ export const ChatInputSkeleton = () => {
   return (
     <div className={styles.wrap}>
       <div className={classNames(styles.inner, styles.pulse)}>
-        <div className={styles.icon} />
         <div className={styles.line} />
         <div className={styles.sendButton} />
       </div>

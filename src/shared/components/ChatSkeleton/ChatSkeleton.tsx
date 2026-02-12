@@ -6,7 +6,7 @@ export const ChatSkeleton = () => {
   return (
     <div className={styles.scene}>
       <div className={styles.list}>
-        {Array.from({ length: 6 }).map((_, index) => {
+        {Array.from({ length: 14 }).map((_, index) => {
           const isUserStub = index % 3 === 2;
 
           return (
