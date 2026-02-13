@@ -67,9 +67,14 @@
 }
 
 .bubbleBot {
-  border: none;
+  border: 1px solid var(--eva-color-neutral-200);
   border-radius: 11px;
-  background: var(--eva-color-bot-bubble);
+  background: linear-gradient(
+    170deg,
+    var(--eva-color-bot-bubble) 0%,
+    var(--eva-color-primary-50) 100%
+  );
+  box-shadow: var(--eva-shadow-sm);
   color: var(--eva-color-bot-bubble-text);
 }
 

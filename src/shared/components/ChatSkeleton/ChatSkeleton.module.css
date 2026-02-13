@@ -1,7 +1,10 @@
 .scene {
   flex: 1;
   overflow: hidden;
-  background: var(--eva-color-neutral-0);
+  background:
+    radial-gradient(1000px 320px at -8% -12%, rgba(47, 107, 255, 0.12), transparent 56%),
+    radial-gradient(780px 250px at 110% -22%, rgba(16, 185, 129, 0.1), transparent 60%),
+    var(--eva-color-neutral-50);
   padding: 14px 16px 12px;
 }
 

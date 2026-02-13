@@ -23,7 +23,7 @@
 }
 
 .innerFocused {
-  border-color: rgba(0, 0, 0, 0.14);
+  border-color: var(--eva-color-primary-300);
 }
 
 .innerDisabled {
@@ -34,13 +34,15 @@
   position: relative;
   flex: 1;
   min-height: 100%;
+  display: flex;
+  flex-direction: column;
   padding: 0;
 }
 
 .placeholder {
   position: absolute;
   left: 0;
-  bottom: 30px;
+  top: 6px;
   transform: translateY(0);
   font-size: 14px;
   font-weight: var(--eva-font-weight-medium);
@@ -49,12 +51,13 @@
 }
 
 .textarea {
-  position: absolute;
-  left: 0;
-  right: 66px;
-  bottom: 0;
-  width: auto;
-  height: 60px;
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 28px;
+  max-height: 104px;
+  padding: 6px 4px 6px 0;
+  margin: 0;
   resize: none;
   background: transparent;
   font-size: 15px;
@@ -62,11 +65,9 @@
   line-height: 1.42;
   letter-spacing: 0;
   color: var(--eva-color-neutral-900);
-  caret-color: var(--eva-color-neutral-800);
+  caret-color: var(--eva-color-primary-500);
   border: none;
   outline: none;
-  max-height: 140px;
-  min-height: 60px;
   scrollbar-width: thin;
   scrollbar-color: var(--eva-color-neutral-400) transparent;
 }
@@ -89,23 +90,85 @@
   cursor: not-allowed;
 }
 
+.inputFooter {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.integrationControl {
+  position: static;
+  min-width: 0;
+  max-width: calc(100% - 82px);
+  font-size: 12px;
+}
+
+.integrationTrigger {
+  min-width: 88px;
+  max-width: 160px;
+  height: 22px;
+  padding: 2px 6px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--eva-color-neutral-900);
+  font-weight: var(--eva-font-weight-semibold);
+  line-height: 1;
+  gap: 4px;
+}
+
+.integrationTrigger:disabled {
+  background: transparent;
+}
+
+.integrationContent {
+  min-width: 132px;
+  max-width: 180px;
+  padding: 4px;
+}
+
+.integrationContent [role='option'] {
+  padding: 6px 8px;
+  font-size: 8px;
+  border-radius: 6px;
+}
+
+.integrationContent [role='option'][aria-selected='true'] {
+  background: transparent;
+  color: var(--eva-color-neutral-900);
+  font-size: 11px;
+  box-shadow: none;
+  outline: none;
+}
+
+.integrationContent [role='option'][aria-selected='true']:hover {
+  background: var(--eva-color-neutral-50);
+}
+
 .sendButton {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
+  position: static;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 11px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background: var(--eva-color-neutral-800);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+  width: 36px;
+  height: 24px;
+  border-radius: 8px;
+  border: 1px solid rgba(47, 107, 255, 0.22);
+  background: linear-gradient(
+    160deg,
+    var(--eva-color-primary-500) 0%,
+    var(--eva-color-primary-600) 100%
+  );
+  box-shadow: var(--eva-shadow-sm);
   color: var(--eva-color-neutral-0);
   cursor: pointer;
   flex-shrink: 0;
-  z-index: 2;
+  z-index: auto;
+  transform: none;
   transition:
     transform var(--eva-transition-fast),
     filter var(--eva-transition-fast),
@@ -113,11 +176,19 @@
 }
 
 .sendButton:hover {
-  filter: brightness(1.06);
+  background: linear-gradient(160deg, #3d78ff 0%, var(--eva-color-primary-600) 100%);
+  transform: translateY(-1px) scale(1.02);
+}
+
+.sendButton:active {
+  transform: scale(0.97);
 }
 
 .sendButton:disabled {
-  opacity: 0.6;
+  border-color: rgba(148, 163, 184, 0.24);
+  background: linear-gradient(160deg, #d2dbe8 0%, #c6d1e0 100%);
+  color: var(--eva-color-neutral-500);
+  opacity: 1;
   cursor: not-allowed;
   transform: none;
   filter: none;
@@ -163,26 +234,40 @@
   }
 
   .placeholder {
-    bottom: 30px;
+    top: 6px;
   }
 
   .textarea {
-    right: 62px;
-    bottom: 0;
-    height: 60px;
-    min-height: 60px;
+    min-height: 26px;
+    max-height: 96px;
+    padding-bottom: 6px;
+  }
+
+  .inputFooter {
+    gap: 6px;
+  }
+
+  .integrationControl {
+    max-width: calc(100% - 76px);
+  }
+
+  .integrationTrigger {
+    min-width: 80px;
+    max-width: 140px;
+    height: 20px;
+    padding: 2px 6px;
+    font-size: 10px;
+  }
+
+  .integrationContent {
+    min-width: 126px;
+    max-width: 160px;
   }
 
   .sendButton {
-    right: 8px;
-    bottom: 8px;
-    width: 50px;
-    height: 38px;
-    border-radius: 11px;
-  }
-
-  .sendButton::after {
-    border-radius: 0 11px 11px 0;
+    width: 34px;
+    height: 22px;
+    border-radius: 7px;
   }
 
   .sendIcon {

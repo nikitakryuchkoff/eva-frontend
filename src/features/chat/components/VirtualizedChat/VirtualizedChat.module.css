@@ -9,10 +9,10 @@
   position: relative;
   z-index: 1;
   padding: 4px 10px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--eva-color-neutral-200);
   border-radius: var(--eva-radius-full);
   background: var(--eva-color-neutral-0);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--eva-shadow-sm);
   font-size: var(--eva-font-size-xs);
   color: var(--eva-color-neutral-500);
 }

@@ -28,6 +28,7 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const isMinimized = useClientStore((s) => s.isMinimized);
+  const setOpen = useClientStore((s) => s.setOpen);
   const virtuosoRef = useRef<VirtuosoHandle>(null);
 
   const {
@@ -43,7 +44,6 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
 
   const [selectedIntegration, setSelectedIntegration] = useState<Integration | null>(null);
   const [hasListError, setHasListError] = useState(false);
-
   const { me, isMeLoading } = useFetchMe();
 
   const { integrations, isIntegrationsLoading } = useFetchIntegrations({
@@ -121,6 +121,8 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
     async (text: string) => {
       const integrationId = selectedIntegration?.id as string;
 
+      if (!integrationId) return;
+
       const userMessage = {
         id: nanoid(),
         innerId: `${nanoid()}-user`,
@@ -156,12 +158,14 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
 
       scrollToBottom();
     },
-    [selectedIntegration?.id, threadId, context, source],
+    [selectedIntegration?.id, threadId, context, source, sendMessageMutation],
   );
 
   const onButtonSend = useCallback(
     async (category: string, text: string) => {
       const integrationId = selectedIntegration?.id as string;
+
+      if (!integrationId) return;
 
       const userMessage = {
         id: nanoid(),
@@ -199,7 +203,7 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
 
       scrollToBottom();
     },
-    [selectedIntegration?.id, source, threadId, context, addMessage],
+    [selectedIntegration?.id, source, threadId, context, addMessage, sendMessageByButtonMutation],
   );
 
   const onButtonClick = useCallback((category: string, label: string) => {
@@ -215,10 +219,7 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
       data-minimized={isMinimized}
     >
       <ChatHeader
-        integrations={integrations}
-        onChange={onIntegrationChange}
-        currentIntegration={selectedIntegration}
-        isLoading={isLoading}
+        onClose={() => setOpen(false)}
       />
 
       <main className={styles.body}>
@@ -246,6 +247,10 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
         ) : (
           <ChatInput
             onSend={onSendMessage}
+            integrations={integrations}
+            currentIntegration={selectedIntegration}
+            onIntegrationChange={onIntegrationChange}
+            isIntegrationsLoading={isIntegrationsLoading}
             disabled={isSending || hasListError || isHistoryLoading}
           />
         )}

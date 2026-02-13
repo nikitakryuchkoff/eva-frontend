@@ -5,7 +5,7 @@
   width: 100%;
   background: var(--eva-color-neutral-0);
   border-radius: 19px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--eva-color-neutral-200);
   box-shadow: var(--eva-shadow-lg);
   overflow: hidden;
   position: fixed;

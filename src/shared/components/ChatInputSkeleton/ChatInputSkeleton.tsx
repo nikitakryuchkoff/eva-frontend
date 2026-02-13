@@ -7,7 +7,10 @@ export const ChatInputSkeleton = () => {
     <div className={styles.wrap}>
       <div className={classNames(styles.inner, styles.pulse)}>
         <div className={styles.line} />
-        <div className={styles.sendButton} />
+        <div className={styles.footerRow}>
+          <div className={styles.selectStub} />
+          <div className={styles.sendButton} />
+        </div>
       </div>
     </div>
   );

@@ -1,8 +1,7 @@
 import { X } from 'lucide-react';
 
-import { Integration, Integrations } from '@/enitites/integration';
 import { LINKS } from '@/shared';
-import { Button, Dropdown, Select } from '@/shared/ui';
+import { Button, Dropdown } from '@/shared/ui';
 
 import styles from './ChatHeader.module.css';
 
@@ -14,29 +13,11 @@ export interface BotVersion {
 }
 
 interface ChatHeaderProps {
-  integrations: Integrations;
-  onChange: (value: Integration) => void;
   onClose?: () => void;
-  currentIntegration: Integration | null;
-  isLoading: boolean;
 }
 
-export const ChatHeader = ({
-  onChange,
-  onClose,
-  integrations,
-  currentIntegration,
-  isLoading,
-}: ChatHeaderProps) => (
+export const ChatHeader = ({ onClose }: ChatHeaderProps) => (
   <header className={styles.header}>
-    <Select
-      options={integrations}
-      value={currentIntegration}
-      onChange={onChange}
-      showStatus
-      isLoading={isLoading}
-    />
-
     <div className={styles.right}>
       <Dropdown items={LINKS} />
 

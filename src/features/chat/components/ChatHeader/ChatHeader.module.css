@@ -1,11 +1,11 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   min-height: 58px;
   padding: 0 14px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  background: var(--eva-color-neutral-50);
+  border-bottom: 1px solid var(--eva-color-neutral-200);
+  background: var(--eva-color-neutral-0);
   box-shadow: none;
   backdrop-filter: none;
   border-radius: 8px 8px 0 0;

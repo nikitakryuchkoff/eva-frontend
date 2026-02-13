@@ -3,18 +3,32 @@ import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from
 import classNames from 'classnames';
 import { Send } from 'lucide-react';
 
+import { Integration, Integrations } from '@/enitites/integration';
+import { Select } from '@/shared/ui';
+
 import styles from './ChatInput.module.css';
 import { useMention } from '../../hooks';
 import { UserList } from '../UserList/UserList';
 
 interface InputAreaProps {
   onSend: (message: string) => void;
+  integrations: Integrations;
+  currentIntegration: Integration | null;
+  onIntegrationChange: (value: Integration) => void;
+  isIntegrationsLoading?: boolean;
   disabled?: boolean;
   statusText?: string;
   helperText?: string;
 }
 
-export const ChatInput = ({ onSend, disabled }: InputAreaProps) => {
+export const ChatInput = ({
+  onSend,
+  integrations,
+  currentIntegration,
+  onIntegrationChange,
+  isIntegrationsLoading = false,
+  disabled,
+}: InputAreaProps) => {
   const [value, setValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const [isMentionVisible, setIsMentionVisible] = useState(false);
@@ -62,6 +76,11 @@ export const ChatInput = ({ onSend, disabled }: InputAreaProps) => {
 
   const handleInputWrapMouseDown = (event: MouseEvent<HTMLDivElement>) => {
     if (disabled) return;
+
+    const target = event.target as HTMLElement;
+    if (target.closest('[data-chat-footer]')) {
+      return;
+    }
 
     event.preventDefault();
 
@@ -127,18 +146,34 @@ export const ChatInput = ({ onSend, disabled }: InputAreaProps) => {
             rows={1}
             className={styles.textarea}
           />
-        </div>
+          <div className={styles.inputFooter} data-chat-footer>
+            <div className={styles.integrationControl}>
+              <Select
+                options={integrations}
+                value={currentIntegration}
+                onChange={onIntegrationChange}
+                showStatus={false}
+                isLoading={isIntegrationsLoading}
+                disabled={Boolean(disabled)}
+                align="start"
+                sideOffset={6}
+                triggerClassName={styles.integrationTrigger ?? ''}
+                contentClassName={styles.integrationContent ?? ''}
+              />
+            </div>
 
-        <button
-          type="button"
-          className={classNames(styles.sendButton, hasValue && styles.animateIn)}
-          onClick={handleSend}
-          disabled={disabled || !hasValue}
-          aria-label="Отправить"
-        >
-          <Send className={styles.sendIcon} />
-          <span className={styles.srOnly}>Отправить</span>
-        </button>
+            <button
+              type="button"
+              className={classNames(styles.sendButton, hasValue && styles.animateIn)}
+              onClick={handleSend}
+              disabled={disabled || !hasValue}
+              aria-label="Отправить"
+            >
+              <Send className={styles.sendIcon} />
+              <span className={styles.srOnly}>Отправить</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
