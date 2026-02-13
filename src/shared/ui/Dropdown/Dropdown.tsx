@@ -17,7 +17,9 @@ interface Props {
   }[];
   onSelect?: (id: string) => void;
   align?: 'end' | 'center' | 'start';
+  alignOffset?: number;
   sideOffset?: number;
+  triggerClassName?: string;
   title?: string;
 }
 
@@ -25,7 +27,9 @@ export const Dropdown: FC<Props> = ({
   items,
   onSelect,
   align = 'end',
+  alignOffset = 0,
   sideOffset = 8,
+  triggerClassName,
   title = 'Обратная связь',
 }) => {
   const handleSelect = useCallback(
@@ -39,13 +43,18 @@ export const Dropdown: FC<Props> = ({
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <Button variant="ghost">
+        <Button variant="ghost" className={triggerClassName}>
           <Menu size={17} />
         </Button>
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
-        <DropdownMenu.Content align={align} sideOffset={sideOffset} className={styles.content}>
+        <DropdownMenu.Content
+          align={align}
+          alignOffset={alignOffset}
+          sideOffset={sideOffset}
+          className={styles.content}
+        >
           <div className={styles.header}>{title}</div>
 
           {items.map((item) => (
@@ -54,9 +63,7 @@ export const Dropdown: FC<Props> = ({
               className={classNames(styles.item, item.variant === 'danger' && styles.itemDanger)}
               onSelect={() => handleSelect(item.id, item.onClick)}
             >
-              <span className={classNames(styles.iconWrap, styles[`icon${item.id}`])}>
-                <item.icon className={styles.icon} />
-              </span>
+              <item.icon className={styles.icon} />
               <span className={styles.itemText}>{item.label}</span>
             </DropdownMenu.Item>
           ))}

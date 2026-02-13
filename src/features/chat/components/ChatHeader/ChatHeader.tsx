@@ -37,7 +37,7 @@ export const ChatHeader = ({ onClose }: ChatHeaderProps) => {
           {theme === 'light' ? <Moon size={17} /> : <Sun size={17} />}
         </Button>
 
-        <Dropdown items={LINKS} />
+        <Dropdown items={LINKS} triggerClassName={styles.headerBtn ?? ''} alignOffset={-54} />
 
         <Button variant="ghost" className={styles.headerBtn} onClick={onClose}>
           <X size={17} />
