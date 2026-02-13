@@ -120,10 +120,18 @@ export const ChatInput = ({
     textareaRef,
   });
 
+  const adjustHeight = useCallback(() => {
+    const ta = textareaRef.current;
+    if (!ta) return;
+    ta.style.height = 'auto';
+    ta.style.height = `${ta.scrollHeight}px`;
+  }, []);
+
   const onChange = (newValue: string) => {
     setValue(newValue);
     const cursorPos = textareaRef.current?.selectionStart ?? newValue.length;
     handleChange(newValue, cursorPos);
+    requestAnimationFrame(adjustHeight);
   };
 
   const handleSend = () => {
@@ -377,6 +385,10 @@ export const ChatInput = ({
       }
     };
   }, []);
+
+  useEffect(() => {
+    adjustHeight();
+  }, [value, adjustHeight]);
 
   useEffect(() => {
     if (isOpen) {
