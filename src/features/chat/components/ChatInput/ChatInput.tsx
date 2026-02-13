@@ -149,6 +149,25 @@ export const ChatInput = ({
     }
   };
 
+  const handleMentionClick = () => {
+    const ta = textareaRef.current;
+    if (!ta) return;
+    const pos = ta.selectionStart ?? value.length;
+    const before = value.slice(0, pos);
+    const after = value.slice(pos);
+    const needSpace = before.length > 0 && !before.endsWith(' ') && !before.endsWith('\n');
+    const insert = (needSpace ? ' ' : '') + '@';
+    const newValue = before + insert + after;
+    const newCursor = pos + insert.length;
+    setValue(newValue);
+    handleChange(newValue, newCursor);
+    requestAnimationFrame(() => {
+      ta.focus();
+      ta.selectionStart = newCursor;
+      ta.selectionEnd = newCursor;
+    });
+  };
+
   const hasValue = value.trim().length > 0;
 
   const handleInputWrapMouseDown = (event: MouseEvent<HTMLDivElement>) => {
@@ -460,7 +479,7 @@ export const ChatInput = ({
           />
           <div className={styles.inputFooter} data-chat-footer>
             <div className={styles.footerLeft}>
-              <button type="button" className={styles.composerIcon} aria-label="Упомянуть">
+              <button type="button" className={styles.composerIcon} onClick={handleMentionClick} aria-label="Упомянуть">
                 <AtSign size={18} />
               </button>
               <button type="button" className={styles.composerIcon} aria-label="Прикрепить файл">
