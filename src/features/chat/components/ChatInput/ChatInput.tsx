@@ -211,6 +211,12 @@ export const ChatInput = ({
       stoppingRef.current = true;
       if (voiceMode === 'speech') {
         recognitionRef.current?.stop();
+        const text = valueRef.current.trim();
+        if (text) {
+          onSendRef.current(text);
+          setValue('');
+          close();
+        }
       } else {
         mediaRecorderRef.current?.stop();
       }
