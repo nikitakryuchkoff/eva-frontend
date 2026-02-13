@@ -158,7 +158,7 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
 
       scrollToBottom();
     },
-    [selectedIntegration?.id, threadId, context, source, sendMessageMutation],
+    [selectedIntegration?.id, threadId, context, source, addMessage, sendMessageMutation],
   );
 
   const onButtonSend = useCallback(
@@ -218,9 +218,7 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
       className={classNames(styles.container, isMinimized && styles.minimized)}
       data-minimized={isMinimized}
     >
-      <ChatHeader
-        onClose={() => setOpen(false)}
-      />
+      <ChatHeader onClose={() => setOpen(false)} />
 
       <main className={styles.body}>
         {isLoading ? (
