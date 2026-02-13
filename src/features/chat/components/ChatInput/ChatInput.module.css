@@ -15,16 +15,37 @@
   border-radius: var(--eva-radius-2xl);
   border: 1px solid var(--eva-composer-border);
   background: var(--eva-composer-bg);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
   padding: 10px 14px 10px 14px;
   transition:
-    border-color var(--eva-transition-normal),
-    box-shadow var(--eva-transition-normal);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.03),
+    0 0 0 0.5px var(--eva-glass-border);
+}
+
+/* Glass top-edge highlight */
+.inner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 16px;
+  right: 16px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--eva-glass-highlight) 50%, transparent 100%);
+  opacity: 0.4;
+  pointer-events: none;
+  border-radius: var(--eva-radius-2xl) var(--eva-radius-2xl) 0 0;
 }
 
 .innerFocused {
   border-color: var(--eva-color-primary-300);
-  box-shadow: 0 0 0 3px rgba(47, 107, 255, 0.08);
+  box-shadow:
+    0 0 0 3px rgba(47, 107, 255, 0.08),
+    0 4px 16px rgba(15, 23, 42, 0.04);
 }
 
 .innerDisabled {
@@ -118,13 +139,18 @@
   background: transparent;
   color: var(--eva-color-neutral-400);
   cursor: pointer;
-  transition: all var(--eva-transition-fast);
+  transition: all 0.15s ease;
   flex-shrink: 0;
 }
 
 .composerIcon:hover {
-  background: var(--eva-color-neutral-100);
+  background: var(--eva-glass-bg);
   color: var(--eva-color-neutral-600);
+  box-shadow: 0 0 0 0.5px var(--eva-glass-border);
+}
+
+.composerIcon:active {
+  transform: scale(0.95);
 }
 
 .integrationControl {
@@ -150,7 +176,7 @@
 }
 
 .integrationTrigger:hover {
-  background: var(--eva-color-neutral-100);
+  background: var(--eva-glass-bg);
 }
 
 .integrationTrigger:disabled {
@@ -178,7 +204,7 @@
 }
 
 .integrationContent [role='option'][aria-selected='true']:hover {
-  background: var(--eva-color-neutral-50);
+  background: var(--eva-glass-bg);
 }
 
 .sendGroup {
@@ -197,21 +223,27 @@
   border-radius: var(--eva-radius-md) 0 0 var(--eva-radius-md);
   border: none;
   background: var(--eva-color-neutral-800);
-  box-shadow: var(--eva-shadow-sm);
+  box-shadow:
+    var(--eva-shadow-sm),
+    0 0 8px var(--eva-glow-subtle);
   color: var(--eva-color-neutral-0);
   cursor: pointer;
   flex-shrink: 0;
   z-index: auto;
   transform: none;
   transition:
-    transform var(--eva-transition-fast),
-    background var(--eva-transition-fast),
-    opacity var(--eva-transition-fast);
+    transform 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.2s ease,
+    opacity 0.15s ease;
 }
 
 .sendButton:hover {
   background: var(--eva-color-neutral-900);
   transform: translateY(-1px);
+  box-shadow:
+    var(--eva-shadow-md),
+    0 0 12px var(--eva-glow-primary);
 }
 
 .sendButton:active {
@@ -224,6 +256,7 @@
   opacity: 1;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
 }
 
 .sendChevron {
@@ -239,7 +272,9 @@
   color: var(--eva-color-neutral-0);
   cursor: pointer;
   flex-shrink: 0;
-  transition: background var(--eva-transition-fast);
+  transition:
+    background 0.15s ease,
+    box-shadow 0.2s ease;
 }
 
 .sendChevron:hover {

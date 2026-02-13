@@ -25,19 +25,43 @@
   margin-left: 0;
   border-radius: var(--eva-radius-2xl);
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-  transition: box-shadow var(--eva-transition-fast);
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .bubbleUser {
+  position: relative;
   border: 1px solid var(--eva-user-bubble-border);
   border-radius: var(--eva-radius-2xl);
   background: var(--eva-user-bubble-gradient);
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
   color: var(--eva-color-neutral-900);
   width: fit-content;
+  box-shadow:
+    0 1px 3px rgba(15, 23, 42, 0.04),
+    0 0 0 0.5px var(--eva-user-bubble-border);
+}
+
+/* Luminous inner edge highlight */
+.bubbleUser::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 12px;
+  right: 12px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+  opacity: 0.6;
+  border-radius: var(--eva-radius-2xl) var(--eva-radius-2xl) 0 0;
+  pointer-events: none;
 }
 
 .bubbleUser:hover {
-  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.07);
+  box-shadow:
+    0 4px 16px rgba(47, 107, 255, 0.08),
+    0 0 0 0.5px var(--eva-user-bubble-border);
 }
 
 .text {

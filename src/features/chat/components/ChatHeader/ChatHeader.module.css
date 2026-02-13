@@ -6,12 +6,31 @@
   padding: 0 16px 0 18px;
   border-bottom: 1px solid var(--eva-header-border);
   background: var(--eva-header-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: var(--eva-header-blur);
+  -webkit-backdrop-filter: var(--eva-header-blur);
   border-radius: var(--eva-radius-3xl) var(--eva-radius-3xl) 0 0;
-  position: sticky;
+  position: absolute;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: var(--eva-z-sticky);
+  box-shadow: var(--eva-header-shadow);
+  transition:
+    background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Inner highlight — top edge reflection */
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+  right: 16px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--eva-glass-highlight) 50%, transparent 100%);
+  opacity: 0.4;
 }
 
 .left {
@@ -30,6 +49,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: 0 2px 8px var(--eva-glow-primary);
 }
 
 .botIcon {

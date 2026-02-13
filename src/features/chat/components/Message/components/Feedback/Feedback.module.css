@@ -16,12 +16,14 @@
   color: var(--eva-color-neutral-400);
   transition:
     background-color 0.15s ease,
-    color 0.15s ease;
+    color 0.15s ease,
+    box-shadow 0.15s ease;
   transform: none !important;
 }
 
 .actionBtn:hover:not(:disabled) {
   color: var(--eva-color-neutral-600);
+  background: var(--eva-glass-bg);
 }
 
 .actionBtn:active:not(:disabled) {
@@ -35,4 +37,5 @@
 .actionBtnActive {
   background: rgba(47, 107, 255, 0.1) !important;
   color: var(--eva-color-primary-500) !important;
+  box-shadow: 0 0 8px var(--eva-glow-primary);
 }

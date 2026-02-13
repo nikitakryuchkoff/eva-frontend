@@ -43,22 +43,45 @@
   --eva-color-system-message-text: #5a6475;
 
   /* Outgoing message gradient */
-  --eva-user-bubble-gradient: linear-gradient(135deg, #dbeafe 0%, #c7d7f5 40%, #d4d4f7 100%);
-  --eva-user-bubble-border: rgba(147, 170, 220, 0.3);
+  --eva-user-bubble-gradient: linear-gradient(135deg, rgba(219, 234, 254, 0.7) 0%, rgba(199, 215, 245, 0.6) 40%, rgba(212, 212, 247, 0.5) 100%);
+  --eva-user-bubble-border: rgba(147, 170, 220, 0.25);
 
-  /* Page & card */
-  --eva-page-bg: #f0f1f5;
-  --eva-card-bg: #ffffff;
-  --eva-card-border: rgba(0, 0, 0, 0.07);
-  --eva-card-shadow: 0 8px 40px rgba(15, 23, 42, 0.08), 0 2px 8px rgba(15, 23, 42, 0.04);
+  /* Page background — mesh gradient */
+  --eva-page-bg: #eef0f5;
+  --eva-page-mesh: radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(59, 130, 246, 0.04) 0%, transparent 60%);
 
-  /* Header blur */
-  --eva-header-bg: rgba(255, 255, 255, 0.72);
+  /* Glass card */
+  --eva-card-bg: rgba(255, 255, 255, 0.55);
+  --eva-card-border: rgba(255, 255, 255, 0.5);
+  --eva-card-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.02),
+    0 8px 24px rgba(15, 23, 42, 0.06),
+    0 24px 48px rgba(15, 23, 42, 0.05);
+  --eva-card-blur: blur(20px) saturate(180%);
+
+  /* Glass header */
+  --eva-header-bg: rgba(255, 255, 255, 0.50);
   --eva-header-border: rgba(0, 0, 0, 0.06);
+  --eva-header-blur: blur(24px) saturate(180%) brightness(105%);
+  --eva-header-shadow: 0 1px 12px rgba(0, 0, 0, 0.08);
 
-  /* Composer */
-  --eva-composer-bg: rgba(246, 248, 251, 0.8);
-  --eva-composer-border: rgba(0, 0, 0, 0.07);
+  /* Glass composer */
+  --eva-composer-bg: rgba(255, 255, 255, 0.45);
+  --eva-composer-border: rgba(255, 255, 255, 0.5);
+
+  /* Glass surfaces */
+  --eva-glass-bg: rgba(255, 255, 255, 0.15);
+  --eva-glass-border: rgba(255, 255, 255, 0.2);
+  --eva-glass-highlight: rgba(255, 255, 255, 0.3);
+
+  /* Noise texture (data URI) */
+  --eva-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+
+  /* Glow accent */
+  --eva-glow-primary: rgba(47, 107, 255, 0.15);
+  --eva-glow-subtle: rgba(99, 102, 241, 0.08);
 
   --eva-font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --eva-font-family-display: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
@@ -115,53 +138,69 @@
   --eva-transition-slow: 300ms ease;
 }
 
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-  :root,
-  #eva-chat-container,
-  :host {
-    --eva-color-neutral-0: #0f1117;
-    --eva-color-neutral-50: #181b23;
-    --eva-color-neutral-100: #1f232d;
-    --eva-color-neutral-200: #2a2f3c;
-    --eva-color-neutral-300: #3b4255;
-    --eva-color-neutral-400: #5a6478;
-    --eva-color-neutral-500: #8891a4;
-    --eva-color-neutral-600: #a8b1c2;
-    --eva-color-neutral-700: #c8cdd8;
-    --eva-color-neutral-800: #e0e4eb;
-    --eva-color-neutral-900: #f1f3f7;
+/* Dark mode — activated by data-theme="dark" on :root or container */
+[data-theme="dark"],
+[data-theme="dark"] #eva-chat-container {
+  --eva-color-neutral-0: #0c0e14;
+  --eva-color-neutral-50: #13161e;
+  --eva-color-neutral-100: #1a1d27;
+  --eva-color-neutral-200: #252832;
+  --eva-color-neutral-300: #353845;
+  --eva-color-neutral-400: #525868;
+  --eva-color-neutral-500: #7d849a;
+  --eva-color-neutral-600: #a0a7b8;
+  --eva-color-neutral-700: #c4c9d6;
+  --eva-color-neutral-800: #dfe3ec;
+  --eva-color-neutral-900: #f0f2f7;
 
-    --eva-color-user-bubble: #1e2a3d;
-    --eva-color-user-bubble-text: #d4e0f5;
-    --eva-color-bot-bubble: #181b23;
-    --eva-color-bot-bubble-text: #dce0ea;
+  --eva-color-user-bubble: #1a2538;
+  --eva-color-user-bubble-text: #d0ddf3;
+  --eva-color-bot-bubble: #13161e;
+  --eva-color-bot-bubble-text: #d8dde8;
 
-    --eva-user-bubble-gradient: linear-gradient(135deg, #1e2d4a 0%, #253352 40%, #2a2b4e 100%);
-    --eva-user-bubble-border: rgba(100, 140, 220, 0.2);
+  --eva-user-bubble-gradient: linear-gradient(135deg, rgba(30, 45, 74, 0.7) 0%, rgba(37, 51, 82, 0.6) 40%, rgba(42, 43, 78, 0.5) 100%);
+  --eva-user-bubble-border: rgba(80, 120, 200, 0.15);
 
-    --eva-page-bg: #0a0c12;
-    --eva-card-bg: #0f1117;
-    --eva-card-border: rgba(255, 255, 255, 0.06);
-    --eva-card-shadow: 0 8px 40px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
+  --eva-page-bg: #080a10;
+  --eva-page-mesh: radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(59, 130, 246, 0.02) 0%, transparent 60%);
 
-    --eva-header-bg: rgba(15, 17, 23, 0.72);
-    --eva-header-border: rgba(255, 255, 255, 0.06);
+  --eva-card-bg: rgba(15, 17, 23, 0.6);
+  --eva-card-border: rgba(255, 255, 255, 0.06);
+  --eva-card-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    0 8px 24px rgba(0, 0, 0, 0.25),
+    0 24px 48px rgba(0, 0, 0, 0.2);
+  --eva-card-blur: blur(24px) saturate(150%) brightness(90%);
 
-    --eva-composer-bg: rgba(24, 27, 35, 0.8);
-    --eva-composer-border: rgba(255, 255, 255, 0.07);
+  --eva-header-bg: rgba(12, 14, 20, 0.50);
+  --eva-header-border: rgba(255, 255, 255, 0.06);
+  --eva-header-blur: blur(24px) saturate(150%) brightness(95%);
+  --eva-header-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
 
-    --eva-color-primary-50: #0f1a30;
-    --eva-color-primary-100: #142544;
-    --eva-color-primary-200: #1e3a6a;
-    --eva-color-primary-300: #2a5090;
-    --eva-color-primary-400: #3d6ebf;
-    --eva-color-primary-500: #4d85e0;
-    --eva-color-primary-600: #6b9df0;
+  --eva-composer-bg: rgba(19, 22, 30, 0.6);
+  --eva-composer-border: rgba(255, 255, 255, 0.06);
 
-    --eva-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --eva-shadow-md: 0 6px 16px rgba(0, 0, 0, 0.3);
-    --eva-shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.35);
-    --eva-shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.4);
-  }
+  --eva-glass-bg: rgba(255, 255, 255, 0.04);
+  --eva-glass-border: rgba(255, 255, 255, 0.08);
+  --eva-glass-highlight: rgba(255, 255, 255, 0.1);
+
+  --eva-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+
+  --eva-glow-primary: rgba(77, 133, 224, 0.12);
+  --eva-glow-subtle: rgba(99, 102, 241, 0.06);
+
+  --eva-color-primary-50: #0f1a30;
+  --eva-color-primary-100: #142544;
+  --eva-color-primary-200: #1e3a6a;
+  --eva-color-primary-300: #2a5090;
+  --eva-color-primary-400: #3d6ebf;
+  --eva-color-primary-500: #4d85e0;
+  --eva-color-primary-600: #6b9df0;
+
+  --eva-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --eva-shadow-md: 0 6px 16px rgba(0, 0, 0, 0.35);
+  --eva-shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.4);
+  --eva-shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.45);
 }

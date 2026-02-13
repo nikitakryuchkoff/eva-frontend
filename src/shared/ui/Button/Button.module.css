@@ -16,7 +16,7 @@
 }
 
 .button:focus-visible {
-  box-shadow: 0 0 0 3px rgba(213, 230, 255, 0.6);
+  box-shadow: 0 0 0 3px rgba(47, 107, 255, 0.15);
 }
 
 .button:active:not(:disabled) {
@@ -53,11 +53,16 @@
 .primary {
   background: var(--eva-color-neutral-800);
   color: var(--eva-color-neutral-0);
-  box-shadow: var(--eva-shadow-sm);
+  box-shadow:
+    var(--eva-shadow-sm),
+    0 0 6px var(--eva-glow-subtle);
 }
 
 .primary:hover:not(:disabled) {
   background: var(--eva-color-neutral-900);
+  box-shadow:
+    var(--eva-shadow-md),
+    0 0 10px var(--eva-glow-primary);
 }
 
 .primary:active:not(:disabled) {
@@ -65,18 +70,21 @@
 }
 
 .secondary {
-  background: var(--eva-color-neutral-50);
+  background: var(--eva-glass-bg);
   color: var(--eva-color-neutral-700);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--eva-glass-border);
+  backdrop-filter: blur(8px) saturate(140%);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
 }
 
 .secondary:hover:not(:disabled) {
-  background: var(--eva-color-neutral-100);
+  background: rgba(255, 255, 255, 0.25);
   color: var(--eva-color-neutral-900);
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
 .secondary:active:not(:disabled) {
-  background: var(--eva-color-neutral-200);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .ghost {
@@ -85,38 +93,40 @@
 }
 
 .ghost:hover:not(:disabled) {
-  background: var(--eva-color-neutral-50);
+  background: var(--eva-glass-bg);
   color: var(--eva-color-neutral-700);
 }
 
 .ghost:active:not(:disabled) {
-  background: var(--eva-color-neutral-100);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .outline {
   background: transparent;
   color: var(--eva-color-neutral-700);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--eva-glass-border);
 }
 
 .outline:hover:not(:disabled) {
-  background: var(--eva-color-neutral-50);
-  border-color: rgba(0, 0, 0, 0.12);
+  background: var(--eva-glass-bg);
+  border-color: rgba(255, 255, 255, 0.35);
   color: var(--eva-color-neutral-900);
 }
 
 .outline:active:not(:disabled) {
-  background: var(--eva-color-neutral-100);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .chat {
   min-height: 38px;
   padding: 9px 16px;
   border-radius: var(--eva-radius-full);
-  border: 1px solid var(--eva-color-neutral-200);
-  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--eva-glass-border);
+  background: var(--eva-glass-bg);
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
   color: var(--eva-color-neutral-700);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
   font-size: 14px;
   font-weight: var(--eva-font-weight-medium);
   line-height: 1.2;
@@ -125,14 +135,17 @@
 }
 
 .chat:hover:not(:disabled) {
-  background: var(--eva-color-neutral-50);
-  border-color: var(--eva-color-neutral-300);
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
   color: var(--eva-color-neutral-900);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    0 0 0 0.5px var(--eva-glass-border);
 }
 
 .chat:focus-visible {
   box-shadow:
-    0 0 0 3px rgba(213, 230, 255, 0.55),
+    0 0 0 3px rgba(47, 107, 255, 0.12),
     0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
