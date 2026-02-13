@@ -229,6 +229,9 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
         ref={containerRef}
         className={classNames(styles.container, isMinimized && styles.minimized)}
         data-minimized={isMinimized}
+        style={{
+          paddingTop: '4px',
+        }}
       >
         <ChatHeader
           onClose={() => setOpen(false)}

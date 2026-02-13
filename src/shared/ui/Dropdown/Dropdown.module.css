@@ -1,14 +1,15 @@
 .content {
+  position: relative;
   min-width: 220px;
   padding: 6px;
-  background: var(--eva-card-bg, rgba(255, 255, 255, 0.55));
-  backdrop-filter: blur(24px) saturate(180%) brightness(105%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(105%);
+  background: var(--eva-header-bg);
+  backdrop-filter: var(--eva-header-blur);
+  -webkit-backdrop-filter: var(--eva-header-blur);
   border: 1px solid var(--eva-glass-border, rgba(255, 255, 255, 0.2));
   border-radius: var(--eva-radius-lg);
   box-shadow:
-    0 8px 32px rgba(15, 23, 42, 0.12),
-    0 2px 8px rgba(15, 23, 42, 0.06),
+    0 8px 32px rgba(15, 23, 42, 0.14),
+    0 2px 8px rgba(15, 23, 42, 0.08),
     0 0 0 0.5px var(--eva-glass-border, rgba(255, 255, 255, 0.2));
   animation: slideDownAndFade 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   transform-origin: var(--radix-dropdown-menu-content-transform-origin);

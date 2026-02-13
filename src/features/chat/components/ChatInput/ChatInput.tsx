@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { AtSign, Paperclip, Mic, Send } from 'lucide-react';
 
 import { Integration, Integrations } from '@/enitites/integration';
-import { Select } from '@/shared/ui';
+import { Select, Tooltip } from '@/shared/ui';
 
 import styles from './ChatInput.module.css';
 import { useMention } from '../../hooks';
@@ -60,6 +60,25 @@ declare global {
 
 type VoiceMode = 'speech' | 'recorder' | 'none';
 
+const ARC_UA_PATTERN = /\bArc\/\d+/i;
+
+const isArcBrowser = () => {
+  if (typeof window === 'undefined') return false;
+
+  if (ARC_UA_PATTERN.test(window.navigator.userAgent ?? '')) {
+    return true;
+  }
+
+  if (typeof document === 'undefined') return false;
+
+  const arcPalette = window
+    .getComputedStyle(document.documentElement)
+    .getPropertyValue('--arc-palette-background')
+    .trim();
+
+  return arcPalette.length > 0;
+};
+
 export const ChatInput = ({
   onSend,
   integrations,
@@ -73,7 +92,9 @@ export const ChatInput = ({
   const [isMentionVisible, setIsMentionVisible] = useState(false);
   const [isMentionClosing, setIsMentionClosing] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
+  const [isArcDetected, setIsArcDetected] = useState(() => isArcBrowser());
   const [voiceMode, setVoiceMode] = useState<VoiceMode>(() => {
+    if (isArcBrowser()) return 'none';
     if (window.SpeechRecognition || window.webkitSpeechRecognition) return 'speech';
     if (typeof MediaRecorder !== 'undefined') return 'recorder';
     return 'none';
@@ -184,6 +205,7 @@ export const ChatInput = ({
 
   const toggleRecording = useCallback(() => {
     if (pendingRef.current) return;
+    if (isArcDetected || voiceMode === 'none') return;
 
     if (isRecording) {
       stoppingRef.current = true;
@@ -315,7 +337,30 @@ export const ChatInput = ({
         }
       }
     }, 2000);
-  }, [isRecording, voiceMode, startMediaRecording]);
+  }, [isRecording, isArcDetected, voiceMode, startMediaRecording]);
+
+  useEffect(() => {
+    const detectTimer = window.setTimeout(() => {
+      if (!isArcBrowser()) return;
+
+      setIsArcDetected(true);
+      setVoiceMode('none');
+      setIsRecording(false);
+      stoppingRef.current = true;
+      recognitionRef.current?.abort();
+
+      if (mediaRecorderRef.current?.state === 'recording') {
+        mediaRecorderRef.current.stop();
+      }
+    }, 1200);
+
+    return () => window.clearTimeout(detectTimer);
+  }, []);
+
+  useEffect(() => {
+    if (!isArcDetected) return;
+    setVoiceMode('none');
+  }, [isArcDetected]);
 
   useEffect(() => {
     return () => {
@@ -349,6 +394,20 @@ export const ChatInput = ({
     styles.inner,
     isFocused && styles.innerFocused,
     disabled && styles.innerDisabled,
+  );
+  const showMicButton = voiceMode !== 'none' || isArcDetected;
+  const micButton = (
+    <button
+      type="button"
+      className={classNames(styles.micButton, isRecording && styles.micRecording)}
+      onClick={toggleRecording}
+      disabled={disabled || isArcDetected}
+      aria-label={
+        isArcDetected ? 'Голосовой ввод недоступен в Arc' : isRecording ? 'Остановить запись' : 'Голосовой ввод'
+      }
+    >
+      <Mic size={16} />
+    </button>
   );
 
   return (
@@ -407,16 +466,14 @@ export const ChatInput = ({
             </div>
 
             <div className={styles.sendGroup}>
-              {voiceMode !== 'none' && (
-                <button
-                  type="button"
-                  className={classNames(styles.micButton, isRecording && styles.micRecording)}
-                  onClick={toggleRecording}
-                  disabled={disabled}
-                  aria-label={isRecording ? 'Остановить запись' : 'Голосовой ввод'}
-                >
-                  <Mic size={16} />
-                </button>
+              {showMicButton && (
+                isArcDetected ? (
+                  <Tooltip content="Голосовой ввод в Arc работает нестабильно и отключён. Используйте Chrome.">
+                    {micButton}
+                  </Tooltip>
+                ) : (
+                  micButton
+                )
               )}
               <button
                 type="button"

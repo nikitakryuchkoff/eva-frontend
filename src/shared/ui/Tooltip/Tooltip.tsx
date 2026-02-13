@@ -13,7 +13,7 @@ interface TooltipProps {
 
 export const Tooltip: FC<TooltipProps> = ({ content, children, position = 'top', delay = 200 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [coords, setCoords] = useState({ x: 0, y: 0 });
+  const [coords, setCoords] = useState({ x: 0, y: 0, arrowOffset: 0 });
   const triggerRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout>(null);
 
@@ -21,9 +21,14 @@ export const Tooltip: FC<TooltipProps> = ({ content, children, position = 'top',
     timeoutRef.current = setTimeout(() => {
       if (triggerRef.current) {
         const rect = triggerRef.current.getBoundingClientRect();
+        const pad = 12;
+        const halfMax = 130;
+        const cx = rect.left + rect.width / 2;
+        const x = Math.max(pad + halfMax, Math.min(cx, window.innerWidth - pad - halfMax));
         setCoords({
-          x: rect.left + rect.width / 2,
+          x,
           y: position === 'top' ? rect.top : rect.bottom,
+          arrowOffset: cx - x,
         });
       }
       setIsVisible(true);
@@ -62,6 +67,7 @@ export const Tooltip: FC<TooltipProps> = ({ content, children, position = 'top',
             {
               '--tooltip-x': `${coords.x}px`,
               '--tooltip-y': `${coords.y}px`,
+              '--arrow-offset': `${coords.arrowOffset}px`,
             } as React.CSSProperties
           }
           role="tooltip"

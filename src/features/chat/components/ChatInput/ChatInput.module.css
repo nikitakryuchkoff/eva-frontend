@@ -235,6 +235,19 @@
   transform: scale(0.95);
 }
 
+.micButton:disabled {
+  background: transparent;
+  color: var(--eva-color-neutral-300);
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.micButton:disabled:hover {
+  background: transparent;
+  color: var(--eva-color-neutral-300);
+}
+
 .micRecording {
   background: rgba(239, 68, 68, 0.12);
   color: var(--eva-color-error);
