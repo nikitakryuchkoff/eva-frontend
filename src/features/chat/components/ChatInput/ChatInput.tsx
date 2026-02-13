@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from 'react';
 
 import classNames from 'classnames';
-import { Send } from 'lucide-react';
+import { Plus, Paperclip, Mic, Send, ChevronDown } from 'lucide-react';
 
 import { Integration, Integrations } from '@/enitites/integration';
 import { Select } from '@/shared/ui';
@@ -147,31 +147,48 @@ export const ChatInput = ({
             className={styles.textarea}
           />
           <div className={styles.inputFooter} data-chat-footer>
-            <div className={styles.integrationControl}>
-              <Select
-                options={integrations}
-                value={currentIntegration}
-                onChange={onIntegrationChange}
-                showStatus={false}
-                isLoading={isIntegrationsLoading}
-                disabled={Boolean(disabled)}
-                align="start"
-                sideOffset={6}
-                triggerClassName={styles.integrationTrigger ?? ''}
-                contentClassName={styles.integrationContent ?? ''}
-              />
+            <div className={styles.footerLeft}>
+              <button type="button" className={styles.composerIcon} aria-label="Добавить">
+                <Plus size={18} />
+              </button>
+              <button type="button" className={styles.composerIcon} aria-label="Прикрепить файл">
+                <Paperclip size={16} />
+              </button>
+              <button type="button" className={styles.composerIcon} aria-label="Голосовое сообщение">
+                <Mic size={16} />
+              </button>
+
+              <div className={styles.integrationControl}>
+                <Select
+                  options={integrations}
+                  value={currentIntegration}
+                  onChange={onIntegrationChange}
+                  showStatus={false}
+                  isLoading={isIntegrationsLoading}
+                  disabled={Boolean(disabled)}
+                  align="start"
+                  sideOffset={6}
+                  triggerClassName={styles.integrationTrigger ?? ''}
+                  contentClassName={styles.integrationContent ?? ''}
+                />
+              </div>
             </div>
 
-            <button
-              type="button"
-              className={classNames(styles.sendButton, hasValue && styles.animateIn)}
-              onClick={handleSend}
-              disabled={disabled || !hasValue}
-              aria-label="Отправить"
-            >
-              <Send className={styles.sendIcon} />
-              <span className={styles.srOnly}>Отправить</span>
-            </button>
+            <div className={styles.sendGroup}>
+              <button
+                type="button"
+                className={classNames(styles.sendButton, hasValue && styles.animateIn)}
+                onClick={handleSend}
+                disabled={disabled || !hasValue}
+                aria-label="Отправить"
+              >
+                <Send className={styles.sendIcon} />
+                <span className={styles.srOnly}>Отправить</span>
+              </button>
+              <button type="button" className={styles.sendChevron} aria-label="Ещё">
+                <ChevronDown size={14} />
+              </button>
+            </div>
           </div>
         </div>
       </div>

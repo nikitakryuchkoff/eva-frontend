@@ -1,22 +1,27 @@
 .feedback {
-  margin-top: 12px;
+  margin-top: 8px;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
+  margin-left: 4px;
 }
 
 .actionBtn {
-  width: 26px;
-  min-width: 26px;
-  height: 26px;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
   padding: 0;
-  border-radius: 7px;
+  border-radius: var(--eva-radius-sm);
   line-height: 0;
+  color: var(--eva-color-neutral-400);
   transition:
     background-color 0.15s ease,
-    color 0.15s ease,
-    box-shadow 0.15s ease;
+    color 0.15s ease;
   transform: none !important;
+}
+
+.actionBtn:hover:not(:disabled) {
+  color: var(--eva-color-neutral-600);
 }
 
 .actionBtn:active:not(:disabled) {
@@ -28,6 +33,6 @@
 }
 
 .actionBtnActive {
-  background: rgba(47, 107, 255, 0.12) !important;
-  color: var(--eva-color-primary-600) !important;
+  background: rgba(47, 107, 255, 0.1) !important;
+  color: var(--eva-color-primary-500) !important;
 }

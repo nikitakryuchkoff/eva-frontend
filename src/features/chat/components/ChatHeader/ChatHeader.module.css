@@ -1,18 +1,117 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  min-height: 58px;
-  padding: 0 14px;
-  border-bottom: 1px solid var(--eva-color-neutral-200);
-  background: var(--eva-color-neutral-0);
-  box-shadow: none;
-  backdrop-filter: none;
-  border-radius: 8px 8px 0 0;
+  justify-content: space-between;
+  min-height: 62px;
+  padding: 0 16px 0 18px;
+  border-bottom: 1px solid var(--eva-header-border);
+  background: var(--eva-header-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--eva-radius-3xl) var(--eva-radius-3xl) 0 0;
+  position: sticky;
+  top: 0;
+  z-index: var(--eva-z-sticky);
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.botBadge {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--eva-radius-md);
+  background: linear-gradient(135deg, var(--eva-color-primary-400), var(--eva-color-primary-600));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.botIcon {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: var(--eva-font-weight-semibold);
+  color: var(--eva-color-neutral-900);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subtitle {
+  font-size: 12px;
+  font-weight: var(--eva-font-weight-medium);
+  color: var(--eva-color-success);
+  line-height: 1.2;
 }
 
 .right {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
+}
+
+.avatarStack {
+  display: flex;
+  align-items: center;
+  margin-right: 6px;
+}
+
+.avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--eva-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  border: 2px solid var(--eva-card-bg);
+  margin-left: -6px;
+  position: relative;
+}
+
+.avatar:first-child {
+  margin-left: 0;
+}
+
+.avatarBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  padding: 0 7px;
+  border-radius: var(--eva-radius-full);
+  background: var(--eva-color-neutral-100);
+  color: var(--eva-color-neutral-600);
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.headerBtn {
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: var(--eva-radius-md);
 }

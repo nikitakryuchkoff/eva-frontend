@@ -1,6 +1,6 @@
 .wrapper {
   display: block;
-  padding: 0 8px 8px 8px;
+  padding: 0 12px 12px 12px;
   background: transparent;
   z-index: 10;
   position: relative;
@@ -12,22 +12,23 @@
   align-items: stretch;
   gap: 8px;
   min-height: 74px;
-  border-radius: 17px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background: var(--eva-color-neutral-50);
-  padding: 10px 12px 10px 12px;
+  border-radius: var(--eva-radius-2xl);
+  border: 1px solid var(--eva-composer-border);
+  background: var(--eva-composer-bg);
+  padding: 10px 14px 10px 14px;
   transition:
     border-color var(--eva-transition-normal),
     box-shadow var(--eva-transition-normal);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
 }
 
 .innerFocused {
   border-color: var(--eva-color-primary-300);
+  box-shadow: 0 0 0 3px rgba(47, 107, 255, 0.08);
 }
 
 .innerDisabled {
-  opacity: 0.6;
+  opacity: 0.55;
 }
 
 .inputWrap {
@@ -46,7 +47,7 @@
   transform: translateY(0);
   font-size: 14px;
   font-weight: var(--eva-font-weight-medium);
-  color: var(--eva-color-neutral-500);
+  color: var(--eva-color-neutral-400);
   pointer-events: none;
 }
 
@@ -62,14 +63,14 @@
   background: transparent;
   font-size: 15px;
   font-weight: var(--eva-font-weight-medium);
-  line-height: 1.42;
+  line-height: 1.48;
   letter-spacing: 0;
   color: var(--eva-color-neutral-900);
   caret-color: var(--eva-color-primary-500);
   border: none;
   outline: none;
   scrollbar-width: thin;
-  scrollbar-color: var(--eva-color-neutral-400) transparent;
+  scrollbar-color: var(--eva-color-neutral-300) transparent;
 }
 
 .textarea::-webkit-scrollbar {
@@ -97,28 +98,59 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  margin-top: 2px;
+  margin-top: 4px;
+}
+
+.footerLeft {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.composerIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--eva-radius-md);
+  border: none;
+  background: transparent;
+  color: var(--eva-color-neutral-400);
+  cursor: pointer;
+  transition: all var(--eva-transition-fast);
+  flex-shrink: 0;
+}
+
+.composerIcon:hover {
+  background: var(--eva-color-neutral-100);
+  color: var(--eva-color-neutral-600);
 }
 
 .integrationControl {
   position: static;
   min-width: 0;
-  max-width: calc(100% - 82px);
+  max-width: 160px;
   font-size: 12px;
 }
 
 .integrationTrigger {
   min-width: 88px;
   max-width: 160px;
-  height: 22px;
-  padding: 2px 6px;
-  border-radius: 8px;
+  height: 24px;
+  padding: 2px 8px;
+  border-radius: var(--eva-radius-sm);
   border: none;
   background: transparent;
-  color: var(--eva-color-neutral-900);
+  color: var(--eva-color-neutral-600);
   font-weight: var(--eva-font-weight-semibold);
+  font-size: 12px;
   line-height: 1;
   gap: 4px;
+}
+
+.integrationTrigger:hover {
+  background: var(--eva-color-neutral-100);
 }
 
 .integrationTrigger:disabled {
@@ -149,20 +181,22 @@
   background: var(--eva-color-neutral-50);
 }
 
+.sendGroup {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
 .sendButton {
   position: static;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 36px;
-  height: 24px;
-  border-radius: 8px;
-  border: 1px solid rgba(47, 107, 255, 0.22);
-  background: linear-gradient(
-    160deg,
-    var(--eva-color-primary-500) 0%,
-    var(--eva-color-primary-600) 100%
-  );
+  height: 30px;
+  border-radius: var(--eva-radius-md) 0 0 var(--eva-radius-md);
+  border: none;
+  background: var(--eva-color-neutral-800);
   box-shadow: var(--eva-shadow-sm);
   color: var(--eva-color-neutral-0);
   cursor: pointer;
@@ -171,13 +205,13 @@
   transform: none;
   transition:
     transform var(--eva-transition-fast),
-    filter var(--eva-transition-fast),
+    background var(--eva-transition-fast),
     opacity var(--eva-transition-fast);
 }
 
 .sendButton:hover {
-  background: linear-gradient(160deg, #3d78ff 0%, var(--eva-color-primary-600) 100%);
-  transform: translateY(-1px) scale(1.02);
+  background: var(--eva-color-neutral-900);
+  transform: translateY(-1px);
 }
 
 .sendButton:active {
@@ -185,13 +219,31 @@
 }
 
 .sendButton:disabled {
-  border-color: rgba(148, 163, 184, 0.24);
-  background: linear-gradient(160deg, #d2dbe8 0%, #c6d1e0 100%);
-  color: var(--eva-color-neutral-500);
+  background: var(--eva-color-neutral-200);
+  color: var(--eva-color-neutral-400);
   opacity: 1;
   cursor: not-allowed;
   transform: none;
-  filter: none;
+}
+
+.sendChevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 30px;
+  border-radius: 0 var(--eva-radius-md) var(--eva-radius-md) 0;
+  border: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  background: var(--eva-color-neutral-800);
+  color: var(--eva-color-neutral-0);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--eva-transition-fast);
+}
+
+.sendChevron:hover {
+  background: var(--eva-color-neutral-900);
 }
 
 .srOnly {
@@ -224,9 +276,9 @@
   }
 
   .inner {
-    min-height: 70px;
+    min-height: 68px;
     padding: 8px 10px;
-    border-radius: 16px;
+    border-radius: var(--eva-radius-xl);
   }
 
   .inputWrap {
@@ -244,17 +296,22 @@
   }
 
   .inputFooter {
-    gap: 6px;
+    gap: 4px;
+  }
+
+  .composerIcon {
+    width: 28px;
+    height: 28px;
   }
 
   .integrationControl {
-    max-width: calc(100% - 76px);
+    max-width: 140px;
   }
 
   .integrationTrigger {
     min-width: 80px;
     max-width: 140px;
-    height: 20px;
+    height: 22px;
     padding: 2px 6px;
     font-size: 10px;
   }
@@ -266,12 +323,16 @@
 
   .sendButton {
     width: 34px;
-    height: 22px;
-    border-radius: 7px;
+    height: 28px;
+  }
+
+  .sendChevron {
+    width: 20px;
+    height: 28px;
   }
 
   .sendIcon {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
   }
 }

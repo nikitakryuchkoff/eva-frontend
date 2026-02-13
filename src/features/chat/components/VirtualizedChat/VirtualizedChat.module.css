@@ -1,19 +1,21 @@
 .chat {
   flex: 1;
   min-height: 1px;
-  background: var(--eva-color-neutral-0);
+  background: transparent;
   scrollbar-gutter: stable;
 }
 
 .loaderText {
   position: relative;
   z-index: 1;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border: 1px solid var(--eva-color-neutral-200);
   border-radius: var(--eva-radius-full);
-  background: var(--eva-color-neutral-0);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
   box-shadow: var(--eva-shadow-sm);
-  font-size: var(--eva-font-size-xs);
+  font-size: 11px;
+  font-weight: var(--eva-font-weight-medium);
   color: var(--eva-color-neutral-500);
 }
 
@@ -21,14 +23,14 @@
   position: relative;
   display: flex;
   justify-content: center;
-  padding: 6px 0 10px;
+  padding: 8px 0 12px;
 }
 
 .historyLoader::before {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 24px;
+  right: 24px;
   top: 50%;
   border-top: 1px solid var(--eva-color-neutral-200);
 }
@@ -36,29 +38,35 @@
 .virtuosoList {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
+  padding: 16px 0;
 }
 
 .listItem {
   --message-gap: 0;
-  width: min(100%, 760px);
+  width: min(100%, 720px);
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 .listItem + .listItem {
-  margin-top: 14px;
+  margin-top: 4px;
 }
 
 .listItem:last-child {
-  padding-bottom: 12px;
+  padding-bottom: 16px;
 }
 
 @media (max-width: 767px) {
   .listItem + .listItem {
-    margin-top: 12px;
+    margin-top: 2px;
+  }
+
+  .listItem {
+    padding: 0 14px;
   }
 
   .chat {
-    padding: 0 12px;
+    padding: 0;
   }
 }

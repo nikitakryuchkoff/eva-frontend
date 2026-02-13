@@ -42,6 +42,24 @@
   --eva-color-system-message: #f3f5f9;
   --eva-color-system-message-text: #5a6475;
 
+  /* Outgoing message gradient */
+  --eva-user-bubble-gradient: linear-gradient(135deg, #dbeafe 0%, #c7d7f5 40%, #d4d4f7 100%);
+  --eva-user-bubble-border: rgba(147, 170, 220, 0.3);
+
+  /* Page & card */
+  --eva-page-bg: #f0f1f5;
+  --eva-card-bg: #ffffff;
+  --eva-card-border: rgba(0, 0, 0, 0.07);
+  --eva-card-shadow: 0 8px 40px rgba(15, 23, 42, 0.08), 0 2px 8px rgba(15, 23, 42, 0.04);
+
+  /* Header blur */
+  --eva-header-bg: rgba(255, 255, 255, 0.72);
+  --eva-header-border: rgba(0, 0, 0, 0.06);
+
+  /* Composer */
+  --eva-composer-bg: rgba(246, 248, 251, 0.8);
+  --eva-composer-border: rgba(0, 0, 0, 0.07);
+
   --eva-font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --eva-font-family-display: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --eva-font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -77,6 +95,8 @@
   --eva-radius-md: 10px;
   --eva-radius-lg: 14px;
   --eva-radius-xl: 18px;
+  --eva-radius-2xl: 22px;
+  --eva-radius-3xl: 28px;
   --eva-radius-full: 9999px;
 
   --eva-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.08);
@@ -93,4 +113,55 @@
   --eva-transition-fast: 150ms ease;
   --eva-transition-normal: 200ms ease;
   --eva-transition-slow: 300ms ease;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root,
+  #eva-chat-container,
+  :host {
+    --eva-color-neutral-0: #0f1117;
+    --eva-color-neutral-50: #181b23;
+    --eva-color-neutral-100: #1f232d;
+    --eva-color-neutral-200: #2a2f3c;
+    --eva-color-neutral-300: #3b4255;
+    --eva-color-neutral-400: #5a6478;
+    --eva-color-neutral-500: #8891a4;
+    --eva-color-neutral-600: #a8b1c2;
+    --eva-color-neutral-700: #c8cdd8;
+    --eva-color-neutral-800: #e0e4eb;
+    --eva-color-neutral-900: #f1f3f7;
+
+    --eva-color-user-bubble: #1e2a3d;
+    --eva-color-user-bubble-text: #d4e0f5;
+    --eva-color-bot-bubble: #181b23;
+    --eva-color-bot-bubble-text: #dce0ea;
+
+    --eva-user-bubble-gradient: linear-gradient(135deg, #1e2d4a 0%, #253352 40%, #2a2b4e 100%);
+    --eva-user-bubble-border: rgba(100, 140, 220, 0.2);
+
+    --eva-page-bg: #0a0c12;
+    --eva-card-bg: #0f1117;
+    --eva-card-border: rgba(255, 255, 255, 0.06);
+    --eva-card-shadow: 0 8px 40px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
+
+    --eva-header-bg: rgba(15, 17, 23, 0.72);
+    --eva-header-border: rgba(255, 255, 255, 0.06);
+
+    --eva-composer-bg: rgba(24, 27, 35, 0.8);
+    --eva-composer-border: rgba(255, 255, 255, 0.07);
+
+    --eva-color-primary-50: #0f1a30;
+    --eva-color-primary-100: #142544;
+    --eva-color-primary-200: #1e3a6a;
+    --eva-color-primary-300: #2a5090;
+    --eva-color-primary-400: #3d6ebf;
+    --eva-color-primary-500: #4d85e0;
+    --eva-color-primary-600: #6b9df0;
+
+    --eva-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --eva-shadow-md: 0 6px 16px rgba(0, 0, 0, 0.3);
+    --eva-shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.35);
+    --eva-shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.4);
+  }
 }

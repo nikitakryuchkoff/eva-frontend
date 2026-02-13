@@ -2,13 +2,11 @@ import { REACTIONS } from '@/shared';
 import { axiosInstance } from '@/shared/api';
 
 import { MessageRequest, Messages, MessageResponse, MessageButtonRequest } from './types';
+import mockMessages from '../../../100.json';
 
-export const fetchMessages = async (integrationId: string, id: number = 10000000) => {
-  const { data } = await axiosInstance.get<Messages>(
-    `/eva/api/ChatBot/history/${id}?integrationId=${integrationId}`,
-  );
-
-  return data;
+export const fetchMessages = async (_integrationId: string, _id: number = 10000000) => {
+  // Мок: вместо запроса на бекенд возвращаем данные из локального файла 100.json
+  return mockMessages as Messages;
 };
 
 export const fetchGreting = async ({

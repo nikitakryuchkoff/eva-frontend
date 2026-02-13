@@ -1,6 +1,7 @@
 import { type FC, memo } from 'react';
 
 import classNames from 'classnames';
+import { CheckCheck } from 'lucide-react';
 
 import { Message } from '@/enitites/message';
 import { Markdown } from '@/shared';
@@ -15,13 +16,18 @@ interface Props {
 export const UserMessage: FC<Props> = memo(({ message, timeLabel }) => {
   return (
     <div className={classNames(styles.message, styles.messageRight)}>
-      {timeLabel && <div className={classNames(styles.meta, styles.metaRight)}>{timeLabel}</div>}
-
       <div className={classNames(styles.bubble, styles.bubbleUser)}>
         <div className={styles.text}>
           <Markdown text={message?.question ?? ''} />
         </div>
       </div>
+
+      {timeLabel && (
+        <div className={classNames(styles.meta, styles.metaRight)}>
+          <CheckCheck size={14} className={styles.readIcon} />
+          {timeLabel}
+        </div>
+      )}
     </div>
   );
 });
