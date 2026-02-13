@@ -33,7 +33,12 @@
   left: 16px;
   right: 16px;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, var(--eva-glass-highlight) 50%, transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--eva-glass-highlight) 50%,
+    transparent 100%
+  );
   opacity: 0.4;
   pointer-events: none;
   border-radius: var(--eva-radius-2xl) var(--eva-radius-2xl) 0 0;
@@ -189,14 +194,13 @@
 
 .integrationContent [role='option'] {
   padding: 6px 8px;
-  font-size: 8px;
+  font-size: 11px;
   border-radius: 6px;
 }
 
 .integrationContent [role='option'][aria-selected='true'] {
   background: transparent;
   color: var(--eva-color-neutral-900);
-  font-size: 11px;
   box-shadow: none;
   outline: none;
 }

@@ -6,7 +6,6 @@ import { Button, Dropdown } from '@/shared/ui';
 
 import styles from './ChatHeader.module.css';
 
-
 export interface BotVersion {
   id: string;
   name: string;
@@ -25,15 +24,20 @@ export const ChatHeader = ({ onClose }: ChatHeaderProps) => {
     <header className={styles.header}>
       <div className={styles.left}>
         <div className={styles.botBadge}>
-          <span className={styles.botIcon}>E</span>
+          <img src={'./images/logo.gif'} alt="Logo" />
         </div>
         <div className={styles.titleBlock}>
-          <span className={styles.title}>EVA Assistant</span>
+          <span className={styles.title}>EVA</span>
         </div>
       </div>
 
       <div className={styles.right}>
-        <Button variant="ghost" className={styles.headerBtn} onClick={toggleTheme} aria-label="Переключить тему">
+        <Button
+          variant="ghost"
+          className={styles.headerBtn}
+          onClick={toggleTheme}
+          aria-label="Переключить тему"
+        >
           {theme === 'light' ? <Moon size={17} /> : <Sun size={17} />}
         </Button>
 
