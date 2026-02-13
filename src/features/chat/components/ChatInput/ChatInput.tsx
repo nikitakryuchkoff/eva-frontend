@@ -120,10 +120,18 @@ export const ChatInput = ({
     textareaRef,
   });
 
+  const adjustHeight = useCallback(() => {
+    const ta = textareaRef.current;
+    if (!ta) return;
+    ta.style.height = 'auto';
+    ta.style.height = `${ta.scrollHeight}px`;
+  }, []);
+
   const onChange = (newValue: string) => {
     setValue(newValue);
     const cursorPos = textareaRef.current?.selectionStart ?? newValue.length;
     handleChange(newValue, cursorPos);
+    requestAnimationFrame(adjustHeight);
   };
 
   const handleSend = () => {
@@ -139,6 +147,25 @@ export const ChatInput = ({
       event.preventDefault();
       handleSend();
     }
+  };
+
+  const handleMentionClick = () => {
+    const ta = textareaRef.current;
+    if (!ta) return;
+    const pos = ta.selectionStart ?? value.length;
+    const before = value.slice(0, pos);
+    const after = value.slice(pos);
+    const needSpace = before.length > 0 && !before.endsWith(' ') && !before.endsWith('\n');
+    const insert = (needSpace ? ' ' : '') + '@';
+    const newValue = before + insert + after;
+    const newCursor = pos + insert.length;
+    setValue(newValue);
+    handleChange(newValue, newCursor);
+    requestAnimationFrame(() => {
+      ta.focus();
+      ta.selectionStart = newCursor;
+      ta.selectionEnd = newCursor;
+    });
   };
 
   const hasValue = value.trim().length > 0;
@@ -379,6 +406,10 @@ export const ChatInput = ({
   }, []);
 
   useEffect(() => {
+    adjustHeight();
+  }, [value, adjustHeight]);
+
+  useEffect(() => {
     if (isOpen) {
       setIsMentionVisible(true);
       setIsMentionClosing(false);
@@ -448,7 +479,7 @@ export const ChatInput = ({
           />
           <div className={styles.inputFooter} data-chat-footer>
             <div className={styles.footerLeft}>
-              <button type="button" className={styles.composerIcon} aria-label="Упомянуть">
+              <button type="button" className={styles.composerIcon} onClick={handleMentionClick} aria-label="Упомянуть">
                 <AtSign size={18} />
               </button>
               <button type="button" className={styles.composerIcon} aria-label="Прикрепить файл">
