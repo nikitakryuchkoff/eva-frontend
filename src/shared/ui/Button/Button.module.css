@@ -120,13 +120,13 @@
 .chat {
   min-height: 38px;
   padding: 9px 16px;
-  border-radius: var(--eva-radius-full);
+  border-radius: 12px;
   border: 1px solid var(--eva-glass-border);
-  background: var(--eva-glass-bg);
-  backdrop-filter: blur(10px) saturate(150%);
-  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  background: var(--eva-card-bg);
   color: var(--eva-color-neutral-700);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 0 0 0.5px var(--eva-glass-border);
   font-size: 14px;
   font-weight: var(--eva-font-weight-medium);
   line-height: 1.2;
@@ -135,12 +135,10 @@
 }
 
 .chat:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.4);
+  background: var(--eva-color-neutral-100);
+  border-color: var(--eva-color-neutral-300);
   color: var(--eva-color-neutral-900);
-  box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.04),
-    0 0 0 0.5px var(--eva-glass-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .chat:focus-visible {

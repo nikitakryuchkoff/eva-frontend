@@ -125,17 +125,20 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
   }, []);
 
   const onSendMessage = useCallback(
-    async (text: string) => {
+    async (text: string, files?: File[]) => {
       const integrationId = selectedIntegration?.id as string;
 
       if (!integrationId) return;
+
+      const displayText = text || (files?.length ? 'Голосовое сообщение' : '');
+      if (!displayText) return;
 
       const userMessage = {
         id: nanoid(),
         innerId: `${nanoid()}-user`,
         integrationId,
         questionDate: new Date().toISOString(),
-        question: text,
+        question: displayText,
         author: MessageAuthor.USER,
       } as Message;
 
@@ -148,6 +151,7 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
         integrationId,
         threadId,
         context,
+        ...(files && { files }),
       });
 
       const assistantMessage = {

@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from 'react';
+import { useEffect, useRef, useState, useCallback, type KeyboardEvent, type MouseEvent } from 'react';
 
 import classNames from 'classnames';
-import { Plus, Paperclip, Mic, Send, ChevronDown } from 'lucide-react';
+import { AtSign, Paperclip, Mic, Send } from 'lucide-react';
 
 import { Integration, Integrations } from '@/enitites/integration';
 import { Select } from '@/shared/ui';
@@ -11,7 +11,7 @@ import { useMention } from '../../hooks';
 import { UserList } from '../UserList/UserList';
 
 interface InputAreaProps {
-  onSend: (message: string) => void;
+  onSend: (message: string, files?: File[]) => void;
   integrations: Integrations;
   currentIntegration: Integration | null;
   onIntegrationChange: (value: Integration) => void;
@@ -20,6 +20,45 @@ interface InputAreaProps {
   statusText?: string;
   helperText?: string;
 }
+
+interface SpeechRecognitionResult {
+  readonly length: number;
+  readonly isFinal: boolean;
+  [index: number]: { transcript: string };
+}
+
+interface SpeechRecognitionResultList {
+  readonly length: number;
+  [index: number]: SpeechRecognitionResult;
+}
+
+type SpeechRecognitionEvent = Event & {
+  results: SpeechRecognitionResultList;
+  resultIndex: number;
+};
+
+type SpeechRecognitionErrorEvent = Event & { error: string };
+
+interface ISpeechRecognition extends EventTarget {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  start(): void;
+  stop(): void;
+  abort(): void;
+  onresult: ((ev: SpeechRecognitionEvent) => void) | null;
+  onerror: ((ev: SpeechRecognitionErrorEvent) => void) | null;
+  onend: (() => void) | null;
+}
+
+declare global {
+  interface Window {
+    SpeechRecognition?: new () => ISpeechRecognition;
+    webkitSpeechRecognition?: new () => ISpeechRecognition;
+  }
+}
+
+type VoiceMode = 'speech' | 'recorder' | 'none';
 
 export const ChatInput = ({
   onSend,
@@ -33,7 +72,16 @@ export const ChatInput = ({
   const [isFocused, setIsFocused] = useState(false);
   const [isMentionVisible, setIsMentionVisible] = useState(false);
   const [isMentionClosing, setIsMentionClosing] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
+  const [voiceMode, setVoiceMode] = useState<VoiceMode>(() => {
+    if (window.SpeechRecognition || window.webkitSpeechRecognition) return 'speech';
+    if (typeof MediaRecorder !== 'undefined') return 'recorder';
+    return 'none';
+  });
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const recognitionRef = useRef<ISpeechRecognition | null>(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
 
   const {
     close,
@@ -92,6 +140,193 @@ export const ChatInput = ({
     textarea.setSelectionRange(cursorPos, cursorPos);
   };
 
+  const baseTextRef = useRef('');
+  const valueRef = useRef(value);
+  valueRef.current = value;
+  const onSendRef = useRef(onSend);
+  onSendRef.current = onSend;
+  const stoppingRef = useRef(false);
+  const startedAtRef = useRef(0);
+  const pendingRef = useRef(false);
+
+  const startMediaRecording = useCallback(async () => {
+    pendingRef.current = true;
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const recorder = new MediaRecorder(stream);
+      audioChunksRef.current = [];
+
+      recorder.addEventListener('dataavailable', (e) => {
+        if (e.data.size > 0) audioChunksRef.current.push(e.data);
+      });
+
+      recorder.addEventListener('stop', () => {
+        stream.getTracks().forEach((t) => t.stop());
+        const blob = new Blob(audioChunksRef.current, {
+          type: recorder.mimeType || 'audio/webm',
+        });
+        const ext = (recorder.mimeType || '').includes('webm') ? 'webm' : 'ogg';
+        const file = new File([blob], `voice-${Date.now()}.${ext}`, { type: blob.type });
+        onSendRef.current('', [file]);
+        mediaRecorderRef.current = null;
+      });
+
+      recorder.start();
+      mediaRecorderRef.current = recorder;
+      pendingRef.current = false;
+      setIsRecording(true);
+    } catch {
+      pendingRef.current = false;
+      setIsRecording(false);
+      setVoiceMode('none');
+    }
+  }, []);
+
+  const toggleRecording = useCallback(() => {
+    if (pendingRef.current) return;
+
+    if (isRecording) {
+      stoppingRef.current = true;
+      if (voiceMode === 'speech') {
+        recognitionRef.current?.stop();
+      } else {
+        mediaRecorderRef.current?.stop();
+      }
+      setIsRecording(false);
+      return;
+    }
+
+    // MediaRecorder mode — record audio and send as file
+    if (voiceMode === 'recorder') {
+      startMediaRecording();
+      return;
+    }
+
+    // Speech-to-text mode
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      if (typeof MediaRecorder !== 'undefined') {
+        setVoiceMode('recorder');
+        startMediaRecording();
+      } else {
+        setVoiceMode('none');
+      }
+      return;
+    }
+
+    baseTextRef.current = valueRef.current;
+    stoppingRef.current = false;
+    pendingRef.current = true;
+
+    const recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = 'ru-RU';
+
+    let alive = false;
+
+    recognition.addEventListener('start', () => {
+      alive = true;
+    });
+
+    recognition.addEventListener('result', ((event: Event) => {
+      const e = event as unknown as SpeechRecognitionEvent;
+      let finalTranscript = '';
+      let interimTranscript = '';
+
+      for (let i = 0; i < e.results.length; i++) {
+        const result = e.results[i];
+        if (!result?.[0]) continue;
+        if (result.isFinal) {
+          finalTranscript += result[0].transcript;
+        } else {
+          interimTranscript += result[0].transcript;
+        }
+      }
+
+      const full = finalTranscript + interimTranscript;
+      const base = baseTextRef.current;
+      const newVal = base ? `${base} ${full}` : full;
+      setValue(newVal);
+
+      setTimeout(() => {
+        const ta = textareaRef.current;
+        if (ta) {
+          ta.focus();
+          ta.setSelectionRange(newVal.length, newVal.length);
+        }
+      }, 0);
+    }) as EventListener);
+
+    recognition.addEventListener('error', (() => {
+      stoppingRef.current = true;
+      pendingRef.current = false;
+      setIsRecording(false);
+      recognitionRef.current = null;
+    }) as EventListener);
+
+    recognition.addEventListener('end', () => {
+      pendingRef.current = false;
+      if (!stoppingRef.current) {
+        const elapsed = Date.now() - startedAtRef.current;
+        if (elapsed < 500) {
+          setIsRecording(false);
+          recognitionRef.current = null;
+          return;
+        }
+        try {
+          recognition.start();
+          startedAtRef.current = Date.now();
+          return;
+        } catch {
+          /* ignore */
+        }
+      }
+      setIsRecording(false);
+      recognitionRef.current = null;
+    });
+
+    recognitionRef.current = recognition;
+
+    try {
+      recognition.start();
+      startedAtRef.current = Date.now();
+      pendingRef.current = false;
+      setIsRecording(true);
+    } catch {
+      pendingRef.current = false;
+      setIsRecording(false);
+      return;
+    }
+
+    // Fallback: if browser has the API but it's dead (e.g. Arc), switch to MediaRecorder
+    setTimeout(() => {
+      if (!alive && recognitionRef.current === recognition) {
+        stoppingRef.current = true;
+        recognition.abort();
+        recognitionRef.current = null;
+
+        if (typeof MediaRecorder !== 'undefined') {
+          setVoiceMode('recorder');
+          startMediaRecording();
+        } else {
+          setVoiceMode('none');
+          setIsRecording(false);
+        }
+      }
+    }, 2000);
+  }, [isRecording, voiceMode, startMediaRecording]);
+
+  useEffect(() => {
+    return () => {
+      stoppingRef.current = true;
+      recognitionRef.current?.abort();
+      if (mediaRecorderRef.current?.state === 'recording') {
+        mediaRecorderRef.current.stop();
+      }
+    };
+  }, []);
+
   useEffect(() => {
     if (isOpen) {
       setIsMentionVisible(true);
@@ -148,14 +383,11 @@ export const ChatInput = ({
           />
           <div className={styles.inputFooter} data-chat-footer>
             <div className={styles.footerLeft}>
-              <button type="button" className={styles.composerIcon} aria-label="Добавить">
-                <Plus size={18} />
+              <button type="button" className={styles.composerIcon} aria-label="Упомянуть">
+                <AtSign size={18} />
               </button>
               <button type="button" className={styles.composerIcon} aria-label="Прикрепить файл">
                 <Paperclip size={16} />
-              </button>
-              <button type="button" className={styles.composerIcon} aria-label="Голосовое сообщение">
-                <Mic size={16} />
               </button>
 
               <div className={styles.integrationControl}>
@@ -175,6 +407,17 @@ export const ChatInput = ({
             </div>
 
             <div className={styles.sendGroup}>
+              {voiceMode !== 'none' && (
+                <button
+                  type="button"
+                  className={classNames(styles.micButton, isRecording && styles.micRecording)}
+                  onClick={toggleRecording}
+                  disabled={disabled}
+                  aria-label={isRecording ? 'Остановить запись' : 'Голосовой ввод'}
+                >
+                  <Mic size={16} />
+                </button>
+              )}
               <button
                 type="button"
                 className={classNames(styles.sendButton, hasValue && styles.animateIn)}
@@ -184,9 +427,6 @@ export const ChatInput = ({
               >
                 <Send className={styles.sendIcon} />
                 <span className={styles.srOnly}>Отправить</span>
-              </button>
-              <button type="button" className={styles.sendChevron} aria-label="Ещё">
-                <ChevronDown size={14} />
               </button>
             </div>
           </div>

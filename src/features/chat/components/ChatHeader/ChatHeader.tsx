@@ -1,4 +1,4 @@
-import { Video, Sun, Moon, X } from 'lucide-react';
+import { Sun, Moon, X } from 'lucide-react';
 
 import { LINKS } from '@/shared';
 import { useClientStore } from '@/shared/store';
@@ -17,12 +17,6 @@ interface ChatHeaderProps {
   onClose?: () => void;
 }
 
-const MOCK_AVATARS = [
-  { name: 'E', color: '#6366f1' },
-  { name: 'A', color: '#f59e0b' },
-  { name: 'M', color: '#10b981' },
-];
-
 export const ChatHeader = ({ onClose }: ChatHeaderProps) => {
   const theme = useClientStore((s) => s.theme);
   const toggleTheme = useClientStore((s) => s.toggleTheme);
@@ -35,28 +29,10 @@ export const ChatHeader = ({ onClose }: ChatHeaderProps) => {
         </div>
         <div className={styles.titleBlock}>
           <span className={styles.title}>EVA Assistant</span>
-          <span className={styles.subtitle}>Online</span>
         </div>
       </div>
 
       <div className={styles.right}>
-        <div className={styles.avatarStack}>
-          {MOCK_AVATARS.map((a, i) => (
-            <div
-              key={i}
-              className={styles.avatar}
-              style={{ background: a.color, zIndex: MOCK_AVATARS.length - i }}
-            >
-              {a.name}
-            </div>
-          ))}
-          <div className={styles.avatarBadge}>+14</div>
-        </div>
-
-        <Button variant="ghost" className={styles.headerBtn}>
-          <Video size={17} />
-        </Button>
-
         <Button variant="ghost" className={styles.headerBtn} onClick={toggleTheme} aria-label="Переключить тему">
           {theme === 'light' ? <Moon size={17} /> : <Sun size={17} />}
         </Button>

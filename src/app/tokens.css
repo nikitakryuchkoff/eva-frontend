@@ -68,8 +68,8 @@
   --eva-header-shadow: 0 1px 12px rgba(0, 0, 0, 0.08);
 
   /* Glass composer */
-  --eva-composer-bg: rgba(255, 255, 255, 0.45);
-  --eva-composer-border: rgba(255, 255, 255, 0.5);
+  --eva-composer-bg: rgba(255, 255, 255, 0.6);
+  --eva-composer-border: rgba(0, 0, 0, 0.08);
 
   /* Glass surfaces */
   --eva-glass-bg: rgba(255, 255, 255, 0.15);

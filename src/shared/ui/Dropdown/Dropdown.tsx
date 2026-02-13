@@ -2,7 +2,7 @@ import { type FC, useCallback } from 'react';
 
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import classNames from 'classnames';
-import { MoreVertical, type LucideIcon } from 'lucide-react';
+import { Menu, type LucideIcon } from 'lucide-react';
 
 import { Button } from '..';
 import styles from './Dropdown.module.css';
@@ -40,7 +40,7 @@ export const Dropdown: FC<Props> = ({
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
         <Button variant="ghost">
-          <MoreVertical size={20} />
+          <Menu size={17} />
         </Button>
       </DropdownMenu.Trigger>
 
