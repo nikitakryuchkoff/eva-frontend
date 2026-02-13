@@ -5,9 +5,9 @@ import classNames from 'classnames';
 import { nanoid } from 'nanoid';
 import { VirtuosoHandle } from 'react-virtuoso';
 
-import { Integration } from '@/enitites/integration';
+import { Integration, useFetchIntegrations } from '@/enitites/integration';
 import { Message, sendMessage, sendMessageByButton, transformMessages } from '@/enitites/message';
-// import { useFetchMe } from '@/enitites/user';
+import { useFetchMe } from '@/enitites/user';
 import { useMobile } from '@/shared';
 import { ChatInputSkeleton, ChatSkeleton } from '@/shared/components';
 import { QUERY_KEYS } from '@/shared/consts';
@@ -15,7 +15,7 @@ import { useChatStore, useClientStore } from '@/shared/store';
 import { MessageAuthor } from '@/shared/types';
 
 import styles from './Chat.module.css';
-import { useChatHistory } from '../../hooks';
+import { useChatHistory, useGreeting } from '../../hooks';
 import { ChatHeader } from '../ChatHeader';
 import { ChatInput } from '../ChatInput';
 import { VirtualizedChat } from '../VirtualizedChat';
@@ -23,13 +23,6 @@ import { VirtualizedChat } from '../VirtualizedChat';
 interface Props {
   source?: string;
 }
-
-const MOCK_INTEGRATION: Integration = {
-  id: 'mock',
-  title: 'MOCK',
-  default: true,
-  withOperator: false,
-};
 
 export const Chat = memo(({ source = 'Nzk' }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -49,20 +42,20 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
     setContext,
   } = useChatStore();
 
-  const [selectedIntegration, setSelectedIntegration] = useState<Integration | null>(MOCK_INTEGRATION);
+  const [selectedIntegration, setSelectedIntegration] = useState<Integration | null>(null);
   const [hasListError, setHasListError] = useState(false);
-  // const { me, isMeLoading } = useFetchMe();
+  const { me, isMeLoading } = useFetchMe();
 
-  // const { integrations, isIntegrationsLoading } = useFetchIntegrations({
-  //   onIntegrationSelect: setSelectedIntegration,
-  // });
+  const { integrations, isIntegrationsLoading } = useFetchIntegrations({
+    onIntegrationSelect: setSelectedIntegration,
+  });
 
-  // const { isLoading: isSayHelloLoading } = useGreeting({
-  //   integrationId: selectedIntegration?.id ?? null,
-  //   source,
-  //   me,
-  //   selectedIntegration,
-  // });
+  const { isLoading: isSayHelloLoading } = useGreeting({
+    integrationId: selectedIntegration?.id ?? null,
+    source,
+    me,
+    selectedIntegration,
+  });
 
   useMobile();
 
@@ -74,7 +67,7 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
     firstItemIndex,
   } = useChatHistory({
     integrationId: selectedIntegration?.id ?? null,
-    enabled: !!selectedIntegration?.id,
+    enabled: !!selectedIntegration?.id && !!me,
   });
 
   const transformedMessages = useMemo(() => transformMessages(messages ?? []), [messages]);
@@ -217,60 +210,59 @@ export const Chat = memo(({ source = 'Nzk' }: Props) => {
     [selectedIntegration?.id, source, threadId, context, addMessage, sendMessageByButtonMutation],
   );
 
-  const onButtonClick = useCallback((category: string, label: string) => {
-    onButtonSend(category, label);
-  }, []);
+  const onButtonClick = useCallback(
+    (category: string, label: string) => {
+      onButtonSend(category, label);
+    },
+    [onButtonSend],
+  );
 
-  const isLoading = isHistoryLoading;
+  const isLoading = isMeLoading || isIntegrationsLoading || isHistoryLoading || isSayHelloLoading;
 
   return (
-    <div className={styles.pageWrapper}>
-      <div
-        ref={containerRef}
-        className={classNames(styles.container, isMinimized && styles.minimized)}
-        data-minimized={isMinimized}
-        style={{
-          paddingTop: '4px',
-        }}
-      >
-        <ChatHeader
-          onClose={() => setOpen(false)}
-        />
+    <div
+      ref={containerRef}
+      className={classNames(styles.container, isMinimized && styles.minimized)}
+      data-minimized={isMinimized}
+      style={{
+        paddingTop: '4px',
+      }}
+    >
+      <ChatHeader onClose={() => setOpen(false)} />
 
-        <main className={styles.body}>
-          {isLoading ? (
-            <ChatSkeleton />
-          ) : (
-            <VirtualizedChat
-              messages={transformedMessages}
-              firstItemIndex={firstItemIndex}
-              hasMore={hasMore}
-              isFetchingMore={isFetchingMore}
-              fetchNextPage={fetchNextPage}
-              onButtonClick={onButtonClick}
-              isTyping={isSending}
-              onError={() => setHasListError(true)}
-              onResetError={() => setHasListError(false)}
-              ref={virtuosoRef}
-            />
-          )}
-        </main>
+      <main className={styles.body}>
+        {isLoading ? (
+          <ChatSkeleton />
+        ) : (
+          <VirtualizedChat
+            messages={transformedMessages}
+            firstItemIndex={firstItemIndex}
+            hasMore={hasMore}
+            isFetchingMore={isFetchingMore}
+            fetchNextPage={fetchNextPage}
+            onButtonClick={onButtonClick}
+            isTyping={isSending}
+            onError={() => setHasListError(true)}
+            onResetError={() => setHasListError(false)}
+            ref={virtuosoRef}
+          />
+        )}
+      </main>
 
-        <footer className={styles.footer}>
-          {isLoading ? (
-            <ChatInputSkeleton />
-          ) : (
-            <ChatInput
-              onSend={onSendMessage}
-              integrations={selectedIntegration ? [selectedIntegration] : [MOCK_INTEGRATION]}
-              currentIntegration={selectedIntegration ?? MOCK_INTEGRATION}
-              onIntegrationChange={onIntegrationChange}
-              isIntegrationsLoading={false}
-              disabled={isSending || hasListError || isHistoryLoading}
-            />
-          )}
-        </footer>
-      </div>
+      <footer className={styles.footer}>
+        {isLoading ? (
+          <ChatInputSkeleton />
+        ) : (
+          <ChatInput
+            onSend={onSendMessage}
+            integrations={integrations}
+            currentIntegration={selectedIntegration}
+            onIntegrationChange={onIntegrationChange}
+            isIntegrationsLoading={isIntegrationsLoading}
+            disabled={isSending || hasListError || isHistoryLoading}
+          />
+        )}
+      </footer>
     </div>
   );
 });

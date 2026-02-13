@@ -13,8 +13,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: min(100%, 820px);
-  height: 78vh;
+  height: 100vh;
+  width: 100%;
   background: var(--eva-card-bg);
   border-radius: var(--eva-radius-3xl);
   border: 1px solid var(--eva-card-border);
@@ -48,7 +48,12 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent 10%, var(--eva-glass-highlight) 50%, transparent 90%);
+  background: linear-gradient(
+    90deg,
+    transparent 10%,
+    var(--eva-glass-highlight) 50%,
+    transparent 90%
+  );
   border-radius: var(--eva-radius-3xl) var(--eva-radius-3xl) 0 0;
   pointer-events: none;
   z-index: 1;
